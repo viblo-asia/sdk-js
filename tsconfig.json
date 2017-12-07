@@ -9,6 +9,7 @@
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "noImplicitAny": false,
         "outDir": "dist"
     },
     "include": [

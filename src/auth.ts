@@ -28,6 +28,8 @@ export interface SocialUser {
     };
 }
 
+let currentToken: OAuthToken | null = null;
+
 async function getOauthToken (params: object) {
     const oauthConfig = sdk.config!.oauth;
 
@@ -62,13 +64,15 @@ export const socialLogin = (credentials: SocialLogin) =>
 export const getSocialUser = (provider: string, params: {code: string}): Promise<SocialUser> =>
     axios.get(`/social/${provider}/callback`, { params }).then(_ => _.data);
 
+/**
+ * Set current token and set the Authorization header for all requests.
+ */
 export function setAccessToken (token: OAuthToken) {
+    currentToken = token;
     axios.defaults.headers.common['Authorization'] = `${token.token_type} ${token.access_token}`;
 }
 
-export default {
-    login,
-    socialLogin,
-    getSocialUser,
-    setAccessToken
-};
+/**
+ * Get the current token.
+ */
+export const getCurrentToken = (): OAuthToken | null => currentToken ? ({ ...currentToken }) : null;

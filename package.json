@@ -1,9 +1,7 @@
 {
   "name": "viblo-sdk",
   "version": "1.0.0",
-  "main": "dist/lib.umd.js",
-  "module": "dist/lib.es5.js",
-  "typings": "lib/index.d.ts",
+  "main": "sdk.js",
   "license": "MIT",
   "scripts": {
     "dev": "rimraf dist && tsc -w",
