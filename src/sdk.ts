@@ -6,17 +6,14 @@ export interface OAuthConfig {
 }
 
 export interface ConfigOption {
-    baseUrl?: string;
     oauth?: OAuthConfig;
 }
 
 export class Config {
-    baseUrl: string = 'https://api.viblo.asia';
     oauth?: OAuthConfig;
 
     constructor (options: ConfigOption) {
         this.oauth = options.oauth;
-        this.baseUrl = options.baseUrl || this.baseUrl;
     }
 }
 
