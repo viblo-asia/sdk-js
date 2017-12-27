@@ -1,0 +1,9 @@
+{
+    "extends": [
+        "tslint-config-standard"
+    ],
+    "rules": {
+        "semicolon": true,
+        "ter-indent": 4
+    }
+}
