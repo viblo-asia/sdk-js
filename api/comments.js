@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = require("../libs/axios");
+exports.getComments = function (commentableType, hashId) {
+    return axios_1.default.get("/" + commentableType + "/" + hashId + "/comments").then(function (_) { return _.data; });
+};
+exports.store = function (commentableType, hashId, input) {
+    return axios_1.default.post("/" + commentableType + "/" + hashId + "/comments", input);
+};
+exports.update = function (hashId, input) {
+    return axios_1.default.put("/comments/" + hashId, input);
+};
+exports.destroy = function (hashId) { return axios_1.default.delete("/comments/" + hashId); };

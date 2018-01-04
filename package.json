@@ -1,0 +1,29 @@
+{
+  "name": "viblo-sdk",
+  "version": "0.1.0",
+  "main": "sdk.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rimraf dist && tsc -w",
+    "compile": "rimraf dist && tsc",
+    "build:copy": "node ./scripts/copy-files.js",
+    "build": "yarn compile && yarn build:copy",
+    "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.53",
+    "fs-extra": "^4.0.2",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.8.0",
+    "tslint-config-standard": "^7.0.0",
+    "typedoc": "^0.9.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bluebird": "^3.5.1",
+    "laravel-echo": "^1.3.2",
+    "markdown-it": "^8.4.0",
+    "remarkable": "^1.7.1"
+  }
+}
