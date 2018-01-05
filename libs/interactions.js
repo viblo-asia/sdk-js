@@ -16,6 +16,8 @@ var RateableType;
 })(RateableType = exports.RateableType || (exports.RateableType = {}));
 var SubscribableType;
 (function (SubscribableType) {
+    SubscribableType["Tag"] = "tag";
+    SubscribableType["User"] = "user";
     SubscribableType["Post"] = "post";
     SubscribableType["Series"] = "series";
     SubscribableType["Question"] = "question";

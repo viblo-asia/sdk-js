@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("../libs/axios");
-exports.all = function (params) {
+exports.getSeriesFeed = function (params) {
     return axios_1.default.get('/series', { params: params }).then(function (_) { return _.data; });
 };
 exports.getSeries = function (hashId) {
@@ -9,7 +9,7 @@ exports.getSeries = function (hashId) {
 };
 exports.createSeries = function (values) { return axios_1.default.post('/series', values); };
 exports.edit = function (hashId) { return axios_1.default.get("/series/" + hashId + "/edit").then(function (_) { return _.data; }); };
-exports.update = function (hashId, values) { return axios_1.default.put("/series/" + hashId, values); };
+exports.updateSeries = function (hashId, values) { return axios_1.default.put("/series/" + hashId, values); };
 exports.deleteSeries = function (hashId) { return axios_1.default.delete("/series/" + hashId); };
 exports.getPosts = function (hashId, params) {
     return axios_1.default.get("/series/" + hashId + "/posts").then(function (_) { return _.data; });

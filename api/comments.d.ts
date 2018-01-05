@@ -21,8 +21,8 @@ export interface CommentInput {
     ancestor_id: number;
 }
 export declare const getComments: (commentableType: CommentableType, hashId: string) => Promise<PagedResource<Comment>>;
-export declare const store: (commentableType: CommentableType, hashId: string, input: CommentInput) => AxiosPromise<any>;
-export declare const update: (hashId: string, input: {
+export declare const postComment: (commentableType: CommentableType, hashId: string, input: CommentInput) => AxiosPromise<any>;
+export declare const updateComment: (hashId: string, input: {
     comment_contents: string;
 }) => AxiosPromise<any>;
-export declare const destroy: (hashId: string) => AxiosPromise<any>;
+export declare const deleteComment: (hashId: string) => AxiosPromise<any>;

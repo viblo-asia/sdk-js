@@ -16,6 +16,4 @@ export interface SearchResult {
     };
 }
 export declare const search: (type: SearchType, params: SearchRequest) => Promise<PagedResource<SearchResult>>;
-export declare const multisearch: (params: {
-    q: string;
-}) => Promise<any>;
+export declare const multisearch: (searchQuery: string, params?: Object | undefined) => Promise<any>;

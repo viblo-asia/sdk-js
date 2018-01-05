@@ -11,6 +11,8 @@ export declare enum RateableType {
     Comment = "comments",
 }
 export declare enum SubscribableType {
+    Tag = "tag",
+    User = "user",
     Post = "post",
     Series = "series",
     Question = "question",

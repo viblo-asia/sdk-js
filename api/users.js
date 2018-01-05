@@ -9,10 +9,10 @@ var associatedResource = function (type) {
         return axios_1.default.get("/users/" + username + "/" + type, { params: params }).then(function (_) { return _.data; });
     };
 };
-exports.getPosts = associatedResource('posts');
-exports.getClips = associatedResource('clips');
-exports.getQuestions = associatedResource('questions');
-exports.getSeries = associatedResource('series');
-exports.getFollowers = associatedResource('followers');
-exports.getFollowings = associatedResource('followings');
-exports.getFollowingTags = associatedResource('following-tags');
+exports.getUserPosts = associatedResource('posts');
+exports.getUserClips = associatedResource('clips');
+exports.getUserQuestions = associatedResource('questions');
+exports.getUserSeries = associatedResource('series');
+exports.getUserFollowers = associatedResource('followers');
+exports.getUserFollowings = associatedResource('followings');
+exports.getUserFollowingTags = associatedResource('following-tags');
