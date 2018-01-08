@@ -29,7 +29,7 @@ export const deleteImage = (uuid: string) => axios.delete(`/me/images/${uuid}`);
 
 // Notifications
 export const getNotifications = (params?: object) => axios.get('/me/notifications', { params });
-export const clearNotifications = (): Promise<any> => axios.post('/me/notifications/clear');
+export const clearNotifications = (params?: object): Promise<any> => axios.post('/me/notifications/clear', { params });
 
 // Profile
 export const getProfile = () => axios.get('/me/settings/profile');
