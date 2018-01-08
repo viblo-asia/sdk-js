@@ -24,4 +24,9 @@ export interface SearchResult {
 export const search = (type: SearchType, params: SearchRequest): Promise<PagedResource<SearchResult>> =>
     axios.get(`/search/${type}`, { params }).then(_ => _.data);
 
-export const multisearch = (params: {q: string}) => axios.get('/search/multi', { params }).then(_ => _.data);
+export const multisearch = (searchQuery: string, params?: Object) => axios.get('/search/multi', {
+    params: {
+        q: searchQuery,
+        ...params
+    }
+}).then(_ => _.data);

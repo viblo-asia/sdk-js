@@ -1,7 +1,7 @@
 declare module 'laravel-echo' {
     import { Channel, PresenceChannel } from 'laravel-echo/src/channel';
 
-    export default class Echo {
+    class Echo {
         /**
          * Create an Echo instance.
          */
@@ -37,4 +37,6 @@ declare module 'laravel-echo' {
          */
         disconnect(): void
     }
+
+    export = Echo;
 }

@@ -1,7 +1,7 @@
 import axios from '../libs/axios';
 import { AxiosPromise } from 'axios';
-import { VoteDir } from '../libs/voting';
 import { PagedResource } from '../types/api';
+import { CommentableType } from '../libs/interactions';
 
 export interface Comment {
     id: number;
@@ -24,20 +24,13 @@ export interface CommentInput {
     ancestor_id: number;
 }
 
-export enum CommentableType {
-    Post = 'posts',
-    Series = 'series',
-    Question = 'questions',
-    Answer = 'answers'
-}
-
 export const getComments = (commentableType: CommentableType, hashId: string): Promise<PagedResource<Comment>> =>
     axios.get(`/${commentableType}/${hashId}/comments`).then(_ => _.data);
 
-export const store = (commentableType: CommentableType, hashId: string, input: CommentInput) =>
+export const postComment = (commentableType: CommentableType, hashId: string, input: CommentInput) =>
     axios.post(`/${commentableType}/${hashId}/comments`, input);
 
-export const update = (hashId: string, input: {comment_contents: string}) =>
+export const updateComment = (hashId: string, input: {comment_contents: string}) =>
     axios.put(`/comments/${hashId}`, input);
 
-export const destroy = (hashId: string) => axios.delete(`/comments/${hashId}`);
+export const deleteComment = (hashId: string) => axios.delete(`/comments/${hashId}`);

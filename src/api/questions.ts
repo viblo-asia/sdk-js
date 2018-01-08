@@ -8,8 +8,16 @@ import {
     PagedResource
 } from '../types/api';
 
-export const all = (params?: Request): Promise<PagedResource<Question>> =>
-    axios.get('/questions', { params }).then(_ => _.data);
+export enum QuestionFeedType {
+    Newest = 'newest',
+    Unsolved = 'unsolved',
+    Unanswered = 'unanswered',
+    Following = 'followings',
+    Clipped = 'clips'
+}
+
+export const getQuestionsFeed = (feed: QuestionFeedType, params?: Request): Promise<PagedResource<Question>> =>
+    axios.get('/questions', { params: { feed, ...params } }).then(_ => _.data);
 
 export const getQuestion = (hashId: string): Promise<QuestionFull> =>
     axios.get(`/questions/${hashId}`).then(_ => _.data);
@@ -21,5 +29,5 @@ export const acceptAnswer = (answer: string, value: boolean) => axios.put(`/answ
 
 export const postQuestion = (input: object) => axios.post('/questions', input);
 export const getQuestionForEdit = (hashId: string) => axios.get(`/questions/${hashId}/edit`);
-export const update = (hashId: string, input: object) => axios.put(`/questions/${hashId}`, input);
+export const updateQuestion = (hashId: string, input: object) => axios.put(`/questions/${hashId}`, input);
 export const deleteQuestion = (hashId: string) => axios.delete(`/questions/${hashId}`);

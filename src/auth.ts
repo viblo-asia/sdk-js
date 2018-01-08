@@ -1,4 +1,4 @@
-import sdk from './sdk';
+import { config } from './sdk';
 import axios from './libs/axios';
 
 export interface LoginCredentials {
@@ -31,7 +31,7 @@ export interface SocialUser {
 let currentToken: OAuthToken | null = null;
 
 async function getOauthToken (params: object) {
-    const oauthConfig = sdk.config!.oauth;
+    const oauthConfig = config!.oauth;
 
     if (oauthConfig) {
         const response = await axios.post('/oauth/token', {
@@ -46,7 +46,7 @@ async function getOauthToken (params: object) {
         };
     }
 
-    return Promise.reject('Oauth client is not set');
+    throw new Error('Oauth client is not set');
 }
 
 export const login = (credentials: LoginCredentials): Promise<OAuthToken> =>
