@@ -13,4 +13,4 @@ exports.getPostsFeed = function (feed, params) {
     return axios_1.default.get('/posts', { params: params }).then(function (_) { return _.data; });
 };
 exports.getPost = function (hashId) { return axios_1.default.get("/posts/" + hashId).then(function (_) { return _.data; }); };
-exports.deletePost = function (hashId) { return axios_1.default.delete("/api/posts/" + hashId); };
+exports.deletePost = function (hashId) { return axios_1.default.delete("/posts/" + hashId); };

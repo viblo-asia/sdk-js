@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("../libs/axios");
 exports.self = function () { return axios_1.default.get('/me').then(function (_) { return _.data.data; }); };
+// Draft contents
+exports.getDrafts = function (params) { return axios_1.default.get('/me/contents/drafts', { params: params }).then(function (_) { return _.data; }); };
 // Uploaded files
 exports.getImages = function (params) {
     return axios_1.default.get('/me/images', { params: params }).then(function (_) { return _.data; });
@@ -9,13 +11,13 @@ exports.getImages = function (params) {
 exports.deleteImage = function (uuid) { return axios_1.default.delete("/me/images/" + uuid); };
 // Notifications
 exports.getNotifications = function (params) { return axios_1.default.get('/me/notifications', { params: params }).then(function (_) { return _.data; }); };
-exports.clearNotifications = function () { return axios_1.default.post('/me/notifications/clear'); };
+exports.clearNotifications = function (params) { return axios_1.default.post('/me/notifications/clear', { params: params }); };
 // Profile
-exports.getProfile = function () { return axios_1.default.get('/me/settings/profile'); };
+exports.getProfile = function () { return axios_1.default.get('/me/settings/profile').then(function (_) { return _.data; }); };
 exports.updateProfile = function (input) { return axios_1.default.post('/me/settings/profile', input); };
 exports.changePassword = function (input) { return axios_1.default.put('/me/settings/password', input); };
 exports.getConnectedAccounts = function () { return axios_1.default.get('/me/settings/socials').then(function (_) { return _.data; }); };
-exports.disconnectSocialAccount = function (service) { return axios_1.default.delete("/api/social/" + service + "/disconnect"); };
+exports.disconnectSocialAccount = function (service) { return axios_1.default.delete("/social/" + service + "/disconnect"); };
 exports.setSocialPrivacy = function (service, value) { return axios_1.default.put('/me/settings/socialPrivacy', { service: service, value: value }); };
 exports.getNotificationSettings = function () { return axios_1.default.get('/me/settings/notification').then(function (_) { return _.data; }); };
 exports.setNotificationSettings = function (name, value) { return axios_1.default.put('/me/settings/notification', { name: name, value: value }); };

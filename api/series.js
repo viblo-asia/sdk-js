@@ -15,13 +15,13 @@ exports.getPosts = function (hashId, params) {
     return axios_1.default.get("/series/" + hashId + "/posts").then(function (_) { return _.data; });
 };
 exports.addPost = function (postId, series) {
-    return axios_1.default.put("/api/series/" + series + "/addPost", { post_id: postId });
+    return axios_1.default.put("/series/" + series + "/addPost", { post_id: postId });
 };
 exports.removePost = function (postId, series) {
-    return axios_1.default.put("/api/series/" + series + "/removePost", { post_id: postId });
+    return axios_1.default.put("/series/" + series + "/removePost", { post_id: postId });
 };
 exports.movePostBefore = function (nextPostId, postId, series) {
-    return axios_1.default.put("/api/series/" + series + "/movePostBefore", {
+    return axios_1.default.put("/series/" + series + "/movePostBefore", {
         next_post_id: nextPostId,
         post_id: postId
     });

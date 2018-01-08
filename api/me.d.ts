@@ -17,11 +17,12 @@ export interface UploadedFile {
     path: string;
 }
 export declare const self: () => Promise<UserSelf>;
+export declare const getDrafts: (params: any) => Promise<any>;
 export declare const getImages: (params?: Request | undefined) => Promise<PagedResource<UploadedFile>>;
 export declare const deleteImage: (uuid: string) => AxiosPromise<any>;
 export declare const getNotifications: (params?: object | undefined) => Promise<any>;
-export declare const clearNotifications: () => Promise<any>;
-export declare const getProfile: () => AxiosPromise<any>;
+export declare const clearNotifications: (params?: object | undefined) => Promise<any>;
+export declare const getProfile: () => Promise<any>;
 export declare const updateProfile: (input: object) => AxiosPromise<any>;
 export declare const changePassword: (input: object) => AxiosPromise<any>;
 export declare const getConnectedAccounts: () => Promise<any>;
