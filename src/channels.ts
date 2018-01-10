@@ -1,7 +1,8 @@
+// Why, Laravel echo? Whyyyyyyyyyyyyy ლ(ಠ益ಠ)ლ
+import Echo = require('laravel-echo');
 import { getCurrentToken } from './auth';
-import Echo from 'laravel-echo';
 
-export function createEchoInstance (options?: object) {
+export function createEchoInstance (options?: object): Echo {
     const token = getCurrentToken();
 
     const auth = token
@@ -9,7 +10,7 @@ export function createEchoInstance (options?: object) {
         : null;
 
     return new Echo({
-        host: `https://viblo.asia:6001`,
+        host: 'https://viblo.asia:6001',
         broadcaster: 'socket.io',
         namespace: 'Framgia.Viblo.Events',
         reconnectionAttempts: 2,

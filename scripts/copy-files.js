@@ -2,6 +2,11 @@ const fse = require('fs-extra');
 
 fse.copy('src/types', 'dist/types');
 
-const files = ['package.json', 'yarn.lock', 'README.md', '.npmignore'];
+const files = ['package.json', 'yarn.lock', 'README.md'];
 
-files.map(file => fse.copy(file, `dist/${file}`));
+files.forEach(file =>
+    fse.copy(file, `dist/${file}`)
+        .catch(() => {
+            console.log(`Cannot copy ${file}`)
+        })
+);

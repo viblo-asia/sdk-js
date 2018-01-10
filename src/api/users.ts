@@ -22,10 +22,10 @@ const associatedResource = <T> (type: string) =>
     (username: string, params?: Request): Promise<PagedResource<T>> =>
         axios.get(`/users/${username}/${type}`, { params }).then(_ => _.data);
 
-export const getPosts = associatedResource<Post>('posts');
-export const getClips = associatedResource<Post>('clips');
-export const getQuestions = associatedResource<Question>('questions');
-export const getSeries = associatedResource<Series>('series');
-export const getFollowers = associatedResource<UserItem>('followers');
-export const getFollowings = associatedResource<UserItem>('followings');
-export const getFollowingTags = associatedResource<TagItem>('following-tags');
+export const getUserPosts = associatedResource<Post>('posts');
+export const getUserClips = associatedResource<Post>('clips');
+export const getUserQuestions = associatedResource<Question>('questions');
+export const getUserSeries = associatedResource<Series>('series');
+export const getUserFollowers = associatedResource<UserItem>('followers');
+export const getUserFollowings = associatedResource<UserItem>('followings');
+export const getUserFollowingTags = associatedResource<TagItem>('following-tags');

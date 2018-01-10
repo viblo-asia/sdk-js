@@ -9,14 +9,16 @@ import {
     PagedResource
 } from '../types/api';
 
-export const all = (params?: Request): Promise<PagedResource<TagItem>> =>
+export const getTags = (params?: Request): Promise<PagedResource<TagItem>> =>
     axios.get('tags', { params }).then(_ => _.data);
+
+export const getTagInfo = (tag): Promise<TagItem> => axios.get(`/tags/${tag}`).then(_ => _.data.data);
 
 const associatedResource = <T> (type: string) =>
     (tag: string, params?: Request): Promise<PagedResource<T>> =>
         axios.get(`/tags/${tag}/${type}`, { params }).then(_ => _.data);
 
-export const getPosts = associatedResource<Post>('posts');
-export const getQuestions = associatedResource<Question>('questions');
-export const getSeries = associatedResource<Series>('series');
-export const getFollowers = associatedResource<UserItem>('followers');
+export const getTagPosts = associatedResource<Post>('posts');
+export const getTagQuestions = associatedResource<Question>('questions');
+export const getTagSeries = associatedResource<Series>('series');
+export const getTagFollowers = associatedResource<UserItem>('followers');

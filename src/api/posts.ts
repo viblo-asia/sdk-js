@@ -7,8 +7,16 @@ import {
     PagedResource
 } from '../types/api';
 
-export const all = (params?: Request): Promise<PagedResource<Post>> =>
+export enum PostFeedType {
+    Newest = 'newest',
+    Trending = 'trending',
+    Following = 'followings',
+    Clipped = 'clips',
+    Featured = 'editors-choice'
+}
+
+export const getPostsFeed = (feed: PostFeedType, params?: Request): Promise<PagedResource<Post>> =>
     axios.get('/posts', { params }).then(_ => _.data);
 
 export const getPost = (hashId: string): Promise<PostFull> => axios.get(`/posts/${hashId}`).then(_ => _.data);
-export const deletePost = (hashId: string) => axios.delete(`/api/posts/${hashId}`);
+export const deletePost = (hashId: string) => axios.delete(`/posts/${hashId}`);
