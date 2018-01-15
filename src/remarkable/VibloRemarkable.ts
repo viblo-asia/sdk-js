@@ -1,3 +1,4 @@
+import { shortnameToImage } from 'emojione'
 import { getLanguage, highlight, highlightAuto } from 'highlight.js'
 import { RemarkableInterface, RemarkableOptions } from '../types/markdown'
 const Remarkable = require('remarkable')
@@ -37,5 +38,8 @@ export class VibloRemarkable extends (Remarkable as RemarkableInterface) impleme
         this.use(KatexPlugin, {
             throwOnError: false
         })
+    }
+    render(str: string, env?: object) {
+        return shortnameToImage(super.render(str, env))
     }
 }
