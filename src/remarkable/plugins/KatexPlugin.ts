@@ -1,5 +1,5 @@
 import { Plugin, Rule, State } from '../../types/markdown'
-const katex = require('katex/dist/katex')
+import * as katex from 'katex'
 
 const isValidClosing = (state: State, pos: number) => {
     const max = state.posMax
