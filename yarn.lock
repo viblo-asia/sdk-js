@@ -274,7 +274,7 @@ has-flag@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
 
-highlight.js@^9.0.0:
+highlight.js@^9.0.0, highlight.js@^9.12.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
@@ -310,6 +310,12 @@ jsonfile@^4.0.0:
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+katex@^0.9.0-beta:
+  version "0.9.0-beta"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.9.0-beta.tgz#4d1f0946bf9391806d8953f9e1a5c28d02adb5b8"
+  dependencies:
+    match-at "^0.1.1"
 
 kind-of@^3.0.2:
   version "3.2.2"
@@ -352,6 +358,10 @@ markdown-it@^8.4.0:
 marked@^0.3.5:
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.7.tgz#80ef3bbf1bd00d1c9cfebe42ba1b8c85da258d0d"
+
+match-at@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/match-at/-/match-at-0.1.1.tgz#25d040d291777704d5e6556bbb79230ec2de0540"
 
 mdurl@^1.0.1:
   version "1.0.1"
@@ -401,6 +411,10 @@ rechoir@^0.6.2:
   resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
   dependencies:
     resolve "^1.1.6"
+
+remarkable-embed@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/remarkable-embed/-/remarkable-embed-0.4.1.tgz#447d3ee8cd51adbe16883e79f045d67e04e47c4b"
 
 remarkable@^1.7.1:
   version "1.7.1"
