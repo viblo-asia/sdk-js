@@ -20,6 +20,13 @@ export interface UploadedFile {
     path: string;
 }
 
+export interface SocialConnect {
+    link_with_account: string;
+    email: string;
+    avatar?: string;
+    url?: string;
+}
+
 export const self = (): Promise<UserSelf> => axios.get('/me').then(_ => _.data.data);
 
 // Draft contents
@@ -43,7 +50,8 @@ export const updateProfile = (input: object) => axios.post('/me/settings/profile
 export const changePassword = (input: object) => axios.put('/me/settings/password', input);
 
 export const getConnectedAccounts = () => axios.get('/me/settings/socials').then(_ => _.data);
-export const disconnectSocialAccount = (service: string) => axios.delete(`/social/${service}/disconnect`);
+export const connectSocialAccount = (service: string, params: SocialConnect) => axios.post(`social/${service}/identities`, params);
+export const disconnectSocialAccount = (service: string) => axios.delete(`/social/${service}/identities`);
 export const setSocialPrivacy = (service: string , value: boolean) => axios.put('/me/settings/socialPrivacy', { service, value });
 
 export const getNotificationSettings = () => axios.get('/me/settings/notification').then(_ => _.data);

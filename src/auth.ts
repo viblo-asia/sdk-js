@@ -6,26 +6,9 @@ export interface LoginCredentials {
     password: string;
 }
 
-export interface SocialLogin {
-    service: string;
-    service_id: string;
-}
-
 export interface OAuthToken {
     token_type: string;
     access_token: string;
-}
-
-export interface SocialUser {
-    connected: boolean;
-    service: string;
-    token: string;
-    social_user: {
-        id: string;
-        email: string;
-        url: string;
-        avatar_url: string;
-    };
 }
 
 let currentToken: OAuthToken | null = null;
@@ -54,15 +37,6 @@ export const login = (credentials: LoginCredentials): Promise<OAuthToken> =>
         ...credentials,
         grant_type: 'password'
     });
-
-export const socialLogin = (credentials: SocialLogin) =>
-    getOauthToken({
-        ...credentials,
-        grant_type: 'social'
-    });
-
-export const getSocialUser = (provider: string, params: {code: string}): Promise<SocialUser> =>
-    axios.get(`/social/${provider}/callback`, { params }).then(_ => _.data);
 
 /**
  * Set current token and set the Authorization header for all requests.
