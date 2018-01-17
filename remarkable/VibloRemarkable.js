@@ -10,6 +10,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var emojione_1 = require("emojione");
+var highlight_js_1 = require("highlight.js");
 var Remarkable = require('remarkable');
 // import AsyncRemarkable from './remarkable/AsyncRemarkable'
 var KatexPlugin_1 = require("./plugins/KatexPlugin");
@@ -23,6 +25,19 @@ var VibloRemarkable = /** @class */ (function (_super) {
         options = Object.assign({
             linkify: true,
             baseUrl: '',
+            highlight: function (str, lang) {
+                if (lang && highlight_js_1.getLanguage(lang)) {
+                    try {
+                        return highlight_js_1.highlight(lang, str).value;
+                    }
+                    catch (err) { }
+                }
+                try {
+                    return highlight_js_1.highlightAuto(str).value;
+                }
+                catch (err) { }
+                return ''; // use external default escaping
+            }
         }, options);
         _this = _super.call(this, options) || this;
         _this.use(EmbedPlugin_1.EmbedPlugin);
@@ -35,6 +50,9 @@ var VibloRemarkable = /** @class */ (function (_super) {
         });
         return _this;
     }
+    VibloRemarkable.prototype.render = function (str, env) {
+        return emojione_1.shortnameToImage(_super.prototype.render.call(this, str, env));
+    };
     return VibloRemarkable;
 }(Remarkable));
 exports.VibloRemarkable = VibloRemarkable;

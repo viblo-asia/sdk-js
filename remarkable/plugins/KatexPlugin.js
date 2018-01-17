@@ -8,7 +8,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var katex = require('katex/dist/katex');
+var katex = require("katex");
 var isValidClosing = function (state, pos) {
     var max = state.posMax;
     var nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1;
