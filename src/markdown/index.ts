@@ -1,7 +1,6 @@
 import Markdown = require('markdown-it');
 import emoji = require('markdown-it-emoji');
 import twemoji = require('twemoji');
-import _upperFirst from 'lodash/upperFirst';
 
 import katex from './plugins/katex';
 import highlight from './plugins/highlight';
