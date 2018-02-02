@@ -1,6 +1,9 @@
 import axios from '../libs/axios';
 import { AxiosPromise } from 'axios';
 
+export const getAnswer = (answer: string) =>
+    axios.get(`/answers/${answer}`);
+
 export const postAnswer = (question: string, values: object) =>
     axios.post(`/questions/${question}/answers`, values);
 
