@@ -12,5 +12,5 @@ var PostFeedType;
 exports.getPostsFeed = function (feed, params) {
     return axios_1.default.get("/posts/" + feed, { params: params }).then(function (_) { return _.data; });
 };
-exports.getPost = function (hashId) { return axios_1.default.get("/posts/" + hashId).then(function (_) { return _.data; }); };
+exports.getPost = function (hashId) { return axios_1.default.get("/posts/" + hashId).then(function (_) { return _.data.post; }); };
 exports.deletePost = function (hashId) { return axios_1.default.delete("/posts/" + hashId); };

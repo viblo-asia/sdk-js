@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("../libs/axios");
-exports.self = function () { return axios_1.default.get('/me').then(function (_) { return _.data.data; }); };
+exports.self = function () { return axios_1.default.get('/me').then(function (_) { return _.data; }); };
 // Draft contents
 exports.getDrafts = function (params) { return axios_1.default.get('/me/contents/drafts', { params: params }).then(function (_) { return _.data; }); };
 // Uploaded files
