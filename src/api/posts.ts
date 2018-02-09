@@ -18,5 +18,5 @@ export enum PostFeedType {
 export const getPostsFeed = (feed: PostFeedType, params?: Request): Promise<PagedResource<Post>> =>
     axios.get(`/posts/${feed}`, { params }).then(_ => _.data);
 
-export const getPost = (hashId: string): Promise<PostFull> => axios.get(`/posts/${hashId}`).then(_ => _.data);
+export const getPost = (hashId: string): Promise<PostFull> => axios.get(`/posts/${hashId}`).then(_ => _.data.post);
 export const deletePost = (hashId: string) => axios.delete(`/posts/${hashId}`);

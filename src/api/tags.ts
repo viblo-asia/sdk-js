@@ -12,7 +12,7 @@ import {
 export const getTags = (params?: Request): Promise<PagedResource<TagItem>> =>
     axios.get('tags', { params }).then(_ => _.data);
 
-export const getTagInfo = (tag): Promise<TagItem> => axios.get(`/tags/${tag}`).then(_ => _.data.data);
+export const getTagInfo = (tag): Promise<TagItem> => axios.get(`/tags/${tag}`).then(_ => _.data);
 
 const associatedResource = <T> (type: string) =>
     (tag: string, params?: Request): Promise<PagedResource<T>> =>

@@ -20,7 +20,7 @@ export interface UploadedFile {
     path: string;
 }
 
-export const self = (): Promise<UserSelf> => axios.get('/me').then(_ => _.data.data);
+export const self = (): Promise<UserSelf> => axios.get('/me').then(_ => _.data);
 
 // Draft contents
 
