@@ -10,9 +10,9 @@ export interface SearchRequest {
 }
 export interface SearchResult {
     highlights: {
-        title: Array<string>;
-        contents: Array<string>;
-        code: Array<string>;
+        title: string[];
+        contents: string[];
+        code: string[];
     };
 }
 export declare const search: (type: SearchType, params: SearchRequest) => Promise<PagedResource<SearchResult>>;

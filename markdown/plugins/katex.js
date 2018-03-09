@@ -113,7 +113,7 @@ var getLineOffsets = function (line, state) { return ({
 function findBlockLastLine(start, end, state) {
     var current = start;
     while (current < end) {
-        current++;
+        current += 1;
         var lineOffsets = getLineOffsets(current, state);
         var first = lineOffsets.start;
         var last = lineOffsets.end;

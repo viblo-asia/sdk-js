@@ -6,8 +6,8 @@ export interface UserSelf {
     name: string;
     email: string;
     username: string;
-    avatar: Array<string>;
-    roles: Array<string>;
+    avatar: string[];
+    roles: string[];
     is_admin: boolean;
     reputation: number;
 }

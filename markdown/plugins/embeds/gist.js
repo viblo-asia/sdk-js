@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = function (code) {
+exports.default = (function (code) {
     if (code.startsWith('https://')) {
         var regExp = /^(?:.*gist\.github\.com\/)([a-zA-Z0-9-]{0,38})\/([a-f0-9]*)$/;
         var match = code.match(regExp);
@@ -14,4 +14,4 @@ exports.default = function (code) {
     return '<div class="embed-responsive embed-responsive-16by9">' +
         ("<iframe id=\"" + id + "\" class=\"embed-responsive-item\" type=\"text/html\" frameborder=\"0\" srcdoc=\"" + gistFrameHTML + "\"></iframe>") +
         '</div>';
-};
+});

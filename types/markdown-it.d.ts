@@ -67,7 +67,7 @@ declare namespace MarkdownIt {
     interface State {
         src: string;
         level: number;
-        tokens: Array<Token>;
+        tokens: Token[];
         push (type: string, tag: string, nesting: number): Token;
     }
 
@@ -79,12 +79,12 @@ declare namespace MarkdownIt {
 
     interface StateBlock extends State {
         line: number;
-        bMarks: Array<number>;
-        eMarks: Array<number>;
-        tShift: Array<number>;
-        sCount: Array<number>;
+        bMarks: number[];
+        eMarks: number[];
+        tShift: number[];
+        sCount: number[];
         blkIndent: number;
-        getLines (begin?: number, end?: number, indent?: number, keepLastLF?: boolean): Array<string>;
+        getLines (begin?: number, end?: number, indent?: number, keepLastLF?: boolean): string[];
     }
 
     interface Renderer {

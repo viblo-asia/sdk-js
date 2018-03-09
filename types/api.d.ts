@@ -17,7 +17,7 @@ export interface Resource<T> {
 }
 
 export interface PagedResource<T> {
-    data: Array<T>;
+    data: T[];
     meta: {
         pagination: LengthAwarePaginator;
     };
@@ -41,7 +41,7 @@ export interface User {
     id: number;
     username: string;
     name: string;
-    avatar: Array<string>;
+    avatar: string[];
 }
 
 export interface UserItem extends User {
@@ -76,7 +76,7 @@ export interface Post {
     views_count: number;
     comments_count: number;
     user: Resource<User>;
-    tags: Resource<Array<Tag>>;
+    tags: Resource<Tag[]>;
     created_at: string;
     updated_at: string;
     edited_at: string;

@@ -18,9 +18,13 @@ exports.updateProfile = function (input) { return axios_1.default.post('/me/sett
 exports.changePassword = function (input) { return axios_1.default.put('/me/settings/password', input); };
 exports.getConnectedAccounts = function () { return axios_1.default.get('/me/settings/socials').then(function (_) { return _.data; }); };
 exports.disconnectSocialAccount = function (service) { return axios_1.default.delete("/social/" + service + "/disconnect"); };
-exports.setSocialPrivacy = function (service, value) { return axios_1.default.put('/me/settings/socialPrivacy', { service: service, value: value }); };
+exports.setSocialPrivacy = function (service, value) {
+    return axios_1.default.put('/me/settings/socialPrivacy', { service: service, value: value });
+};
 exports.getNotificationSettings = function () { return axios_1.default.get('/me/settings/notification').then(function (_) { return _.data; }); };
-exports.setNotificationSettings = function (name, value) { return axios_1.default.put('/me/settings/notification', { name: name, value: value }); };
+exports.setNotificationSettings = function (name, value) {
+    return axios_1.default.put('/me/settings/notification', { name: name, value: value });
+};
 exports.getServiceSettings = function () { return axios_1.default.get('/me/settings/service').then(function (_) { return _.data; }); };
 exports.setServiceSettings = function (name, value) { return axios_1.default.put('/me/settings/service', { name: name, value: value }); };
 // Subscriptions

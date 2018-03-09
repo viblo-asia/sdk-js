@@ -11,7 +11,7 @@ export interface NewNotificationEvent {
 }
 export interface NotificationClearedEvent {
     /** IDs of cleared notifications */
-    ids: Array<Number>;
+    ids: number[];
     /** Whether the notifications are mark as read or deleted permanently */
     deleted: Boolean;
 }
