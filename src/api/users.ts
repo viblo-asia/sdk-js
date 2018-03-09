@@ -12,7 +12,7 @@ import {
 } from '../types/api';
 
 export interface Profile extends UserItem {
-    social_accounts: Array<SocialAccount>;
+    social_accounts: SocialAccount[];
 }
 
 export const getProfile = (username: string, params?: object): Promise<Profile> =>

@@ -10,7 +10,7 @@ let currentToken: OAuthToken | null = null;
 /**
  * Set current token and set the Authorization header for all requests.
  */
-export function setAccessToken (token: OAuthToken) {
+export function setAccessToken(token: OAuthToken) {
     currentToken = token;
     axios.defaults.headers.common['Authorization'] = `${token.token_type} ${token.access_token}`;
 }

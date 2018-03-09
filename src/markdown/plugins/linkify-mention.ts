@@ -1,5 +1,5 @@
 export const createDefinition = (baseURL: string) => ({
-    validate: function (text: string, pos: number, self: any) {
+    validate (text: string, pos: number, self: any) {
         const tail = text.slice(pos);
 
         if (!self.re.mention) {
@@ -18,7 +18,7 @@ export const createDefinition = (baseURL: string) => ({
         return 0;
     },
 
-    normalize: function (match) {
+    normalize (match) {
         const username = match.url.replace(/^@/, '');
         match.url = `${baseURL}/${username}`;
     }

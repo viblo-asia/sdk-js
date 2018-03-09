@@ -21,7 +21,7 @@ const parse = (renderers: Object) => function (state: StateInline) {
     return true;
 };
 
-const render = (renderers: Object) => function (tokens: Array<Token>, idx: number) {
+const render = (renderers: Object) => function (tokens: Token[], idx: number) {
     const token = tokens[idx];
     const renderer = token.meta.renderer;
 

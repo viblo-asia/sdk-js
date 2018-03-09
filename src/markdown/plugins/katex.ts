@@ -3,7 +3,7 @@
 import katex = require('katex/dist/katex');
 import { MarkdownIt, Options, StateInline, StateBlock } from 'markdown-it';
 
-function isValidClosing (state: StateInline, pos: number) {
+function isValidClosing(state: StateInline, pos: number) {
     const max = state.posMax;
     const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1;
 
@@ -11,7 +11,7 @@ function isValidClosing (state: StateInline, pos: number) {
     return nextChar < 0x30 || nextChar > 0x39;
 }
 
-function math_inline (state: StateInline, silent: boolean) {
+function math_inline(state: StateInline, silent: boolean) {
     if (state.src[state.pos] !== '$') {
         return false;
     }
@@ -80,7 +80,7 @@ function math_inline (state: StateInline, silent: boolean) {
     return true;
 }
 
-function math_block (state: StateBlock, start: number, end: number, silent: boolean) {
+function math_block(state: StateBlock, start: number, end: number, silent: boolean) {
     let firstLine;
 
     const firstLineOffsets = getLineOffsets(start, state);
@@ -130,7 +130,7 @@ function math_block (state: StateBlock, start: number, end: number, silent: bool
     token.content = (firstLine && firstLine.trim() ? firstLine + '\n' : '') +
         state.getLines(start + 1, current, state.tShift[start], true) +
         (lastLine && lastLine.trim() ? lastLine : '');
-    token.map = [ start, state.line ];
+    token.map = [start, state.line];
     token.markup = '$$';
 
     return true;
@@ -141,11 +141,11 @@ const getLineOffsets = (line, state) => ({
     end: state.eMarks[line]
 });
 
-function findBlockLastLine (start: number, end: number, state: StateBlock) {
+function findBlockLastLine(start: number, end: number, state: StateBlock) {
     let current = start;
 
     while (current < end) {
-        current++;
+        current += 1;
 
         const lineOffsets = getLineOffsets(current, state);
         const first = lineOffsets.start;
@@ -164,7 +164,7 @@ function findBlockLastLine (start: number, end: number, state: StateBlock) {
     return null;
 }
 
-function render (content: string, options: any) {
+function render(content: string, options: any) {
     try {
         return options.displayMode
             ? '<p>' + katex.renderToString(content, options) + '</p>'
@@ -181,7 +181,7 @@ function render (content: string, options: any) {
 export default function (md: MarkdownIt) {
     md.inline.ruler.after('escape', 'math_inline', math_inline);
     md.block.ruler.after('blockquote', 'math_block', math_block, {
-        alt: [ 'paragraph', 'reference', 'blockquote', 'list' ]
+        alt: ['paragraph', 'reference', 'blockquote', 'list']
     });
 
     md.renderer.rules.math_inline = (tokens, idx) => render(tokens[idx].content, { displayMode: false });

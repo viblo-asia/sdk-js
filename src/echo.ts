@@ -15,7 +15,7 @@ export interface NewNotificationEvent {
 
 export interface NotificationClearedEvent {
     /** IDs of cleared notifications */
-    ids: Array<Number>;
+    ids: number[];
     /** Whether the notifications are mark as read or deleted permanently */
     deleted: Boolean;
 }
@@ -37,7 +37,7 @@ const setAuthorizationHeader = (token: OAuthToken, options: object) => ({
     }
 });
 
-export function newConnection (options?: object): Echo {
+export function newConnection(options?: object): Echo {
     const token = getCurrentToken();
 
     const baseOptions = token
@@ -50,15 +50,15 @@ export function newConnection (options?: object): Echo {
     });
 }
 
-export function joinPrivateChannel (userId: string, connection: Echo): Channel {
+export function joinPrivateChannel(userId: string, connection: Echo): Channel {
     const channel = `Framgia.Viblo.Models.User.${userId}`;
     return connection.private(channel);
 }
 
-export function onNewNotification (listener: (event: NewNotificationEvent) => void, channel: Channel) {
+export function onNewNotification(listener: (event: NewNotificationEvent) => void, channel: Channel) {
     channel.notification(listener);
 }
 
-export function onNotificationCleared (listener: (event: NotificationClearedEvent) => void, channel: Channel) {
+export function onNotificationCleared(listener: (event: NotificationClearedEvent) => void, channel: Channel) {
     channel.listen('NotificationsCleared', listener);
 }

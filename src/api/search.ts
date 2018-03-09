@@ -15,9 +15,9 @@ export interface SearchRequest {
 
 export interface SearchResult {
     highlights: {
-        title: Array<string>;
-        contents: Array<string>;
-        code: Array<string>;
+        title: string[];
+        contents: string[];
+        code: string[];
     };
 }
 

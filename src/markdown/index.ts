@@ -24,7 +24,7 @@ const defaultOptions: Options = {
     embed: true
 };
 
-export function createRenderer (options: Options = defaultOptions) {
+export function createRenderer(options: Options = defaultOptions) {
     const md = Markdown({
         highlight,
         linkify: true

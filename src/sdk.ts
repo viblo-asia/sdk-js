@@ -19,6 +19,6 @@ export class Config {
 
 export let config: Config;
 
-export function init (options: ConfigOption) {
+export function init(options: ConfigOption) {
     config = new Config(options);
 }
