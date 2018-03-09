@@ -10,7 +10,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // Why, Laravel echo? Whyyyyyyyyyyyyy ლ(ಠ益ಠ)ლ
 var Echo = require("laravel-echo");
-var auth_1 = require("./auth");
+var auth_1 = require("../auth");
+var PrivateChannel_1 = require("./PrivateChannel");
+var NewPostsChannel_1 = require("./NewPostsChannel");
 var defaultOptions = {
     host: 'https://viblo.asia:6001',
     broadcaster: 'socket.io',
@@ -32,15 +34,10 @@ function newConnection(options) {
 }
 exports.newConnection = newConnection;
 function joinPrivateChannel(userId, connection) {
-    var channel = "Framgia.Viblo.Models.User." + userId;
-    return connection.private(channel);
+    return new PrivateChannel_1.default(userId, connection);
 }
 exports.joinPrivateChannel = joinPrivateChannel;
-function onNewNotification(listener, channel) {
-    channel.notification(listener);
+function joinNewPostsChannel(connection) {
+    return new NewPostsChannel_1.default(connection);
 }
-exports.onNewNotification = onNewNotification;
-function onNotificationCleared(listener, channel) {
-    channel.listen('NotificationsCleared', listener);
-}
-exports.onNotificationCleared = onNotificationCleared;
+exports.joinNewPostsChannel = joinNewPostsChannel;
