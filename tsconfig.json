@@ -10,6 +10,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "noImplicitAny": false,
+        "strictPropertyInitialization": false,
         "outDir": "dist"
     },
     "include": [
