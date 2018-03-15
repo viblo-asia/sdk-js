@@ -5,7 +5,7 @@ var NewPostsChannel = /** @class */ (function () {
         this.channel = connection.channel('newly-published-post');
     }
     NewPostsChannel.prototype.onNewPostPublished = function (listener) {
-        this.channel.listen("PostsPublished", listener);
+        this.channel.listen('Posts\\Published', listener);
     };
     return NewPostsChannel;
 }());
