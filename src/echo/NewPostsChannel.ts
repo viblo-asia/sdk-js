@@ -11,6 +11,6 @@ export default class NewPostsChannel
     }
 
     public onNewPostPublished(listener: (event: NewPostPublishedEvent) => void) {
-        this.channel.listen(`Posts\Published`, listener);
+        this.channel.listen('Posts\\Published', listener);
     }
 }
