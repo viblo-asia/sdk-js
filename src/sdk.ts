@@ -22,3 +22,5 @@ export let config: Config;
 export function init(options: ConfigOption) {
     config = new Config(options);
 }
+
+export { default as axios } from './libs/axios';

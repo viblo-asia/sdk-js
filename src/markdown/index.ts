@@ -27,6 +27,7 @@ const defaultOptions: Options = {
 export function createRenderer(options: Options = defaultOptions) {
     const md = Markdown({
         highlight,
+        html: true,
         linkify: true
     });
 
