@@ -11,3 +11,4 @@ export declare class Config {
 }
 export declare let config: Config;
 export declare function init(options: ConfigOption): void;
+export { default as axios } from './libs/axios';

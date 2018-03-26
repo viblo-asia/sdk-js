@@ -21,6 +21,7 @@ function createRenderer(options) {
     if (options === void 0) { options = defaultOptions; }
     var md = Markdown({
         highlight: highlight_1.default,
+        html: true,
         linkify: true
     });
     md.use(emoji);

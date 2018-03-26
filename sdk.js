@@ -11,3 +11,5 @@ function init(options) {
     exports.config = new Config(options);
 }
 exports.init = init;
+var axios_1 = require("./libs/axios");
+exports.axios = axios_1.default;
