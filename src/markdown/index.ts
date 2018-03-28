@@ -1,6 +1,7 @@
+import twemoji = require('twemoji');
 import Markdown = require('markdown-it');
 import emoji = require('markdown-it-emoji');
-import twemoji = require('twemoji');
+import sanitize = require('markdown-it-sanitizer');
 
 import katex from './plugins/katex';
 import highlight from './plugins/highlight';
@@ -23,6 +24,15 @@ const defaultOptions: Options = {
     baseURL: 'https://viblo.asia',
     embed: true
 };
+
+const embedPlugin = createEmbedPlugin({
+    codepen,
+    gist,
+    googleslide,
+    slideshare,
+    vimeo,
+    youtube
+});
 
 export function createRenderer(options: Options = defaultOptions) {
     const md = Markdown({
@@ -50,17 +60,10 @@ export function createRenderer(options: Options = defaultOptions) {
     md.linkify.add('@', createMentionPlugin(`${options.baseURL}/u`));
 
     if (options.embed !== false) {
-        const embedPlugin = createEmbedPlugin({
-            codepen,
-            gist,
-            googleslide,
-            slideshare,
-            vimeo,
-            youtube
-        });
-
         md.use(embedPlugin);
     }
+
+    md.use(sanitize);
 
     return md;
 }
