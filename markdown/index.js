@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var twemoji = require("twemoji");
 var Markdown = require("markdown-it");
 var emoji = require("markdown-it-emoji");
-var twemoji = require("twemoji");
+var sanitize = require("markdown-it-sanitizer");
 var katex_1 = require("./plugins/katex");
 var highlight_1 = require("./plugins/highlight");
 var linkify_mention_1 = require("./plugins/linkify-mention");
@@ -17,6 +18,14 @@ var defaultOptions = {
     baseURL: 'https://viblo.asia',
     embed: true
 };
+var embedPlugin = embed_1.createPlugin({
+    codepen: codepen_1.default,
+    gist: gist_1.default,
+    googleslide: google_slide_1.default,
+    slideshare: slideshare_1.default,
+    vimeo: vimeo_1.default,
+    youtube: youtube_1.default
+});
 function createRenderer(options) {
     if (options === void 0) { options = defaultOptions; }
     var md = Markdown({
@@ -37,16 +46,9 @@ function createRenderer(options) {
     };
     md.linkify.add('@', linkify_mention_1.createDefinition(options.baseURL + "/u"));
     if (options.embed !== false) {
-        var embedPlugin = embed_1.createPlugin({
-            codepen: codepen_1.default,
-            gist: gist_1.default,
-            googleslide: google_slide_1.default,
-            slideshare: slideshare_1.default,
-            vimeo: vimeo_1.default,
-            youtube: youtube_1.default
-        });
         md.use(embedPlugin);
     }
+    md.use(sanitize);
     return md;
 }
 exports.createRenderer = createRenderer;
