@@ -29,7 +29,6 @@ export declare const getConnectedAccounts: () => Promise<any>;
 export declare const disconnectSocialAccount: (service: string) => AxiosPromise<any>;
 export declare const setSocialPrivacy: (service: string, value: boolean) => AxiosPromise<any>;
 export declare const getNotificationSettings: () => Promise<any>;
-export declare const setNotificationSettings: (name: string, value: boolean) => AxiosPromise<any>;
 export declare const getServiceSettings: () => Promise<any>;
-export declare const setServiceSettings: (name: string, value: boolean) => AxiosPromise<any>;
+export declare const updateSettings: (name: any, value: any) => AxiosPromise<any>;
 export declare function subscribe(type: SubscribableType, key: string, value: boolean): AxiosPromise<any>;

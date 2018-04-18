@@ -22,11 +22,11 @@ exports.setSocialPrivacy = function (service, value) {
     return axios_1.default.put('/me/settings/socialPrivacy', { service: service, value: value });
 };
 exports.getNotificationSettings = function () { return axios_1.default.get('/me/settings/notification').then(function (_) { return _.data; }); };
-exports.setNotificationSettings = function (name, value) {
-    return axios_1.default.put('/me/settings/notification', { name: name, value: value });
-};
 exports.getServiceSettings = function () { return axios_1.default.get('/me/settings/service').then(function (_) { return _.data; }); };
-exports.setServiceSettings = function (name, value) { return axios_1.default.put('/me/settings/service', { name: name, value: value }); };
+exports.updateSettings = function (name, value) {
+    return axios_1.default.put('/me/settings', (_a = {}, _a[name] = value, _a));
+    var _a;
+};
 // Subscriptions
 function subscribe(type, key, value) {
     var url = "/me/subscriptions/" + type + "/" + key;
