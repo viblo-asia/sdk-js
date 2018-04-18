@@ -48,11 +48,9 @@ export const setSocialPrivacy = (service: string , value: boolean) =>
     axios.put('/me/settings/socialPrivacy', { service, value });
 
 export const getNotificationSettings = () => axios.get('/me/settings/notification').then(_ => _.data);
-export const setNotificationSettings = (name: string, value: boolean) =>
-    axios.put('/me/settings/notification', { name, value });
-
 export const getServiceSettings = () => axios.get('/me/settings/service').then(_ => _.data);
-export const setServiceSettings = (name: string, value: boolean) => axios.put('/me/settings/service', { name, value });
+
+export const updateSettings = (name, value) => axios.put('/me/settings', { [name]: value });
 
 // Subscriptions
 export function subscribe(type: SubscribableType, key: string, value: boolean) {
