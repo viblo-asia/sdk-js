@@ -9,6 +9,7 @@ import { createDefinition as createMentionPlugin } from './plugins/linkify-menti
 import { createPlugin as createEmbedPlugin } from './plugins/embed';
 
 import codepen from './plugins/embeds/codepen';
+import jsfiddle from './plugins/embeds/jsfiddle';
 import gist from './plugins/embeds/gist';
 import googleslide from './plugins/embeds/google-slide';
 import slideshare from './plugins/embeds/slideshare';
@@ -27,6 +28,7 @@ const defaultOptions: Options = {
 
 const embedPlugin = createEmbedPlugin({
     codepen,
+    jsfiddle,
     gist,
     googleslide,
     slideshare,
