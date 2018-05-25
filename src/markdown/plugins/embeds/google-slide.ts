@@ -1,15 +1,30 @@
-export default (code: string): string => {
+const encodeURI = (uri: string): string => {
+    return `https://docs.google.com/presentation/d/${encodeURIComponent(uri)}/embed`
+        + `?start=false&loop=false&delayms=3000`;
+};
+
+const parseGoogleSlideURL = (code: string): string => {
     if (code.startsWith('https://docs.google.com/presentation/d/')) {
         const match = code.match(/[-\w]{25,}/);
-        if (!match) {
-            return '';
-        }
-        code = match[0];
+        return !match ? '' : encodeURI(match[0]);
     }
 
-    code = `https://docs.google.com/presentation/d/${encodeURIComponent(code)}/embed?start=false&loop=false&delayms=3000`;
+    return encodeURI(code);
+};
 
-    return '<div class="embed-responsive embed-responsive-16by9">' +
-        `<iframe class="embed-responsive-item" src="${code}" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>` +
-        '</div>';
+export default (code: string): string => {
+    const embedURL = parseGoogleSlideURL(code);
+    if (!embedURL) {
+        return '';
+    }
+
+    return `<div class="embed-responsive embed-responsive-16by9">
+        <iframe
+            class="embed-responsive-item"
+            src="${code}"
+            frameborder="0"
+            allowfullscreen="true"
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"></iframe>
+    </div>`;
 };
