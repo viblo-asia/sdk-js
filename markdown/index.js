@@ -6,9 +6,11 @@ var emoji = require("markdown-it-emoji");
 var sanitize = require("markdown-it-sanitizer");
 var katex_1 = require("./plugins/katex");
 var highlight_1 = require("./plugins/highlight");
-var linkify_mention_1 = require("./plugins/linkify-mention");
+var utils_1 = require("./utils");
 var embed_1 = require("./plugins/embed");
+var linkify_mention_1 = require("./plugins/linkify-mention");
 var codepen_1 = require("./plugins/embeds/codepen");
+var jsfiddle_1 = require("./plugins/embeds/jsfiddle");
 var gist_1 = require("./plugins/embeds/gist");
 var google_slide_1 = require("./plugins/embeds/google-slide");
 var slideshare_1 = require("./plugins/embeds/slideshare");
@@ -16,10 +18,12 @@ var vimeo_1 = require("./plugins/embeds/vimeo");
 var youtube_1 = require("./plugins/embeds/youtube");
 var defaultOptions = {
     baseURL: 'https://viblo.asia',
-    embed: true
+    embed: true,
+    absoluteURL: true
 };
 var embedPlugin = embed_1.createPlugin({
     codepen: codepen_1.default,
+    jsfiddle: jsfiddle_1.default,
     gist: gist_1.default,
     googleslide: google_slide_1.default,
     slideshare: slideshare_1.default,
@@ -27,7 +31,7 @@ var embedPlugin = embed_1.createPlugin({
     youtube: youtube_1.default
 });
 function createRenderer(options) {
-    if (options === void 0) { options = defaultOptions; }
+    var mergedOptions = Object.assign({}, defaultOptions, options);
     var md = Markdown({
         highlight: highlight_1.default,
         html: true,
@@ -36,16 +40,20 @@ function createRenderer(options) {
     md.use(emoji);
     md.renderer.rules.emoji = function (token, idx) { return twemoji.parse(token[idx].content); };
     md.use(katex_1.default, { throwOnError: false });
-    var defaultRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
-        return self.renderToken(tokens, idx, options);
-    };
-    md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-        tokens[idx].attrPush(['target', '_blank']);
-        // pass token to default renderer.
-        return defaultRender(tokens, idx, options, env, self);
-    };
-    md.linkify.add('@', linkify_mention_1.createDefinition(options.baseURL + "/u"));
-    if (options.embed !== false) {
+    /* tslint:disable:align */
+    utils_1.alterToken('link_open', function (token) {
+        token.attrPush(['target', '_blank']);
+        if (mergedOptions.absoluteURL) {
+            var href = token.attrGet('href');
+            if (href && href.startsWith('/')) {
+                token.attrSet('href', "" + mergedOptions.baseURL + href);
+            }
+        }
+        return token;
+    }, md);
+    /* tslint:enable:align */
+    md.linkify.add('@', linkify_mention_1.createDefinition(mergedOptions.baseURL + "/u"));
+    if (mergedOptions.embed !== false) {
         md.use(embedPlugin);
     }
     md.use(sanitize);
