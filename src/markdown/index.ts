@@ -5,8 +5,9 @@ import sanitize = require('markdown-it-sanitizer');
 
 import katex from './plugins/katex';
 import highlight from './plugins/highlight';
-import { createDefinition as createMentionPlugin } from './plugins/linkify-mention';
+import { alterToken } from './utils';
 import { createPlugin as createEmbedPlugin } from './plugins/embed';
+import { createDefinition as createMentionPlugin } from './plugins/linkify-mention';
 
 import codepen from './plugins/embeds/codepen';
 import jsfiddle from './plugins/embeds/jsfiddle';
@@ -17,13 +18,18 @@ import vimeo from './plugins/embeds/vimeo';
 import youtube from './plugins/embeds/youtube';
 
 export interface Options {
+    /** Base URL */
     baseURL: string;
+    /** Whether to render embedments or not */
     embed?: boolean;
+    /** Should relative URLs be made to absolute */
+    absoluteURL?: boolean;
 }
 
 const defaultOptions: Options = {
     baseURL: 'https://viblo.asia',
-    embed: true
+    embed: true,
+    absoluteURL: true
 };
 
 const embedPlugin = createEmbedPlugin({
@@ -36,7 +42,9 @@ const embedPlugin = createEmbedPlugin({
     youtube
 });
 
-export function createRenderer(options: Options = defaultOptions) {
+export function createRenderer(options: Options) {
+    const mergedOptions = Object.assign({}, defaultOptions, options);
+
     const md = Markdown({
         highlight,
         html: true,
@@ -48,20 +56,24 @@ export function createRenderer(options: Options = defaultOptions) {
 
     md.use(katex, { throwOnError: false });
 
-    const defaultRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
-        return self.renderToken(tokens, idx, options);
-    };
+    /* tslint:disable:align */
+    alterToken('link_open', (token) => {
+        token.attrPush(['target', '_blank']);
 
-    md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-        tokens[idx].attrPush(['target', '_blank']);
+        if (mergedOptions.absoluteURL) {
+            const href = token.attrGet('href');
+            if (href && href.startsWith('/')) {
+                token.attrSet('href', `${mergedOptions.baseURL}${href}`);
+            }
+        }
 
-        // pass token to default renderer.
-        return defaultRender(tokens, idx, options, env, self);
-    };
+        return token;
+    }, md);
+    /* tslint:enable:align */
 
-    md.linkify.add('@', createMentionPlugin(`${options.baseURL}/u`));
+    md.linkify.add('@', createMentionPlugin(`${mergedOptions.baseURL}/u`));
 
-    if (options.embed !== false) {
+    if (mergedOptions.embed !== false) {
         md.use(embedPlugin);
     }
 
