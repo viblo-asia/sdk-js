@@ -10,7 +10,7 @@ export default (code: string): string => {
     const gistFrameHTML = `<html><body><script src='${embedURL}'></script></body></html>`;
 
     return `<div class="embed-responsive embed-responsive-16by9">
-        <iframe 
+        <iframe
             id="${id}"
             class="embed-responsive-item"
             type="text/html"

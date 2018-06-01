@@ -35,14 +35,18 @@ const defaultOptions: Options = {
 export function createRenderer(options: Options) {
     const mergedOptions = Object.assign({}, defaultOptions, options);
 
+    const slideshare = createSlideshareRenderer({
+        baseURL: mergedOptions.baseURL
+    });
+
     const embedPlugin = createEmbedPlugin({
         codepen,
         jsfiddle,
         gist,
         googleslide,
-        slideshare: createSlideshareRenderer(mergedOptions),
         vimeo,
-        youtube
+        youtube,
+        slideshare
     });
 
     const md = Markdown({
