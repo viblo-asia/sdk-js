@@ -13,7 +13,7 @@ import codepen from './plugins/embeds/codepen';
 import jsfiddle from './plugins/embeds/jsfiddle';
 import gist from './plugins/embeds/gist';
 import googleslide from './plugins/embeds/google-slide';
-import slideshare from './plugins/embeds/slideshare';
+import createSlideshareRenderer from './plugins/embeds/slideshare';
 import vimeo from './plugins/embeds/vimeo';
 import youtube from './plugins/embeds/youtube';
 
@@ -32,18 +32,18 @@ const defaultOptions: Options = {
     absoluteURL: true
 };
 
-const embedPlugin = createEmbedPlugin({
-    codepen,
-    jsfiddle,
-    gist,
-    googleslide,
-    slideshare,
-    vimeo,
-    youtube
-});
-
 export function createRenderer(options: Options) {
     const mergedOptions = Object.assign({}, defaultOptions, options);
+
+    const embedPlugin = createEmbedPlugin({
+        codepen,
+        jsfiddle,
+        gist,
+        googleslide,
+        slideshare: createSlideshareRenderer(mergedOptions),
+        vimeo,
+        youtube
+    });
 
     const md = Markdown({
         highlight,
