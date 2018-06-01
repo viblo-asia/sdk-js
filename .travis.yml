@@ -1,0 +1,22 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+branches:
+  only:
+  - master
+
+script:
+  - yarn lint
+  - yarn build
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
