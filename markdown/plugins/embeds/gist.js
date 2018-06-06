@@ -9,5 +9,5 @@ exports.default = (function (code) {
     var embedURL = "https://gist.github.com/" + match[1] + ".js";
     var id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 10);
     var gistFrameHTML = "<html><body><script src='" + embedURL + "'></script></body></html>";
-    return "<div class=\"embed-responsive embed-responsive-16by9\" style=\"overflow:visible\">\n        <iframe\n            id=\"" + id + "\"\n            class=\"embed-responsive-item\"\n            type=\"text/html\"\n            frameborder=\"0\"\n            scrolling=\"no\"\n            onload=\"this.style.height = this.contentDocument.body.scrollHeight + 'px'\"\n            srcdoc=\"" + gistFrameHTML + "\"></iframe>\n    </div>";
+    return "<div class=\"embed-responsive embed-responsive-16by9\">\n        <iframe\n            id=\"" + id + "\"\n            class=\"embed-responsive-item\"\n            type=\"text/html\"\n            frameborder=\"0\"\n            srcdoc=\"" + gistFrameHTML + "\"></iframe>\n    </div>";
 });
