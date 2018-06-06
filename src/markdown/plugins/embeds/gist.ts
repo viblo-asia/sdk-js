@@ -9,12 +9,14 @@ export default (code: string): string => {
     const id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 10);
     const gistFrameHTML = `<html><body><script src='${embedURL}'></script></body></html>`;
 
-    return `<div class="embed-responsive embed-responsive-16by9">
+    return `<div class="embed-responsive embed-responsive-16by9" style="overflow:visible">
         <iframe
             id="${id}"
             class="embed-responsive-item"
             type="text/html"
             frameborder="0"
+            scrolling="no"
+            onload="this.style.height = this.contentDocument.body.scrollHeight + 'px'"
             srcdoc="${gistFrameHTML}"></iframe>
     </div>`;
 };
