@@ -21,17 +21,20 @@ var defaultOptions = {
     embed: true,
     absoluteURL: true
 };
-var embedPlugin = embed_1.createPlugin({
-    codepen: codepen_1.default,
-    jsfiddle: jsfiddle_1.default,
-    gist: gist_1.default,
-    googleslide: google_slide_1.default,
-    slideshare: slideshare_1.default,
-    vimeo: vimeo_1.default,
-    youtube: youtube_1.default
-});
 function createRenderer(options) {
     var mergedOptions = Object.assign({}, defaultOptions, options);
+    var slideshare = slideshare_1.default({
+        baseURL: mergedOptions.baseURL
+    });
+    var embedPlugin = embed_1.createPlugin({
+        codepen: codepen_1.default,
+        jsfiddle: jsfiddle_1.default,
+        gist: gist_1.default,
+        googleslide: google_slide_1.default,
+        vimeo: vimeo_1.default,
+        youtube: youtube_1.default,
+        slideshare: slideshare
+    });
     var md = Markdown({
         highlight: highlight_1.default,
         html: true,
