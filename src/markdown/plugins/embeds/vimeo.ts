@@ -1,3 +1,6 @@
+import { EmbedOptions } from '../embed';
+import { renderEmbed } from '../../utils';
+
 const encodeURI = (uri: string): string => {
     return `https://player.vimeo.com/video/${encodeURIComponent(uri)}`;
 };
@@ -16,20 +19,18 @@ const parseVimeoURL = (code: string): string => {
     return encodeURI(code);
 };
 
-export default (code: string): string => {
-    const embedURL = parseVimeoURL(code);
+export default (str: string, options: EmbedOptions): string => {
+    const embedURL = parseVimeoURL(str);
     if (!embedURL) {
-        return '';
+        return str;
     }
 
-    return `<div class="embed-responsive embed-responsive-16by9">
-        <iframe
-            class="embed-responsive-item"
-            type="text/html"
-            src="${embedURL}"
-            frameborder="0"
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen></iframe>
-    </div>`;
+    return renderEmbed({
+        type: 'text/html',
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 };

@@ -6,6 +6,8 @@
 		"ter-indent": 4,
 		"max-line-length": [true, 120],
 		"trailing-comma": [true, "never"],
-		"import-name": false
+		"import-name": false,
+		"variable-name": [true, "check-format", "allow-leading-underscore"],
+		"align": [true, "parameters"]
 	}
 }

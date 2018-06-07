@@ -1,3 +1,6 @@
+import { EmbedOptions } from '../embed';
+import { renderEmbed } from '../../utils';
+
 const parseYoutubeURL = (code: string): string => {
     if (code.startsWith('https://')) {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -12,17 +15,19 @@ const parseYoutubeURL = (code: string): string => {
     return code;
 };
 
-export default (code: string): string => {
-    const embedURL = parseYoutubeURL(code);
+export default (str: string, options: EmbedOptions): string => {
+    const embedURL = parseYoutubeURL(str);
 
-    return !embedURL ? '' : `<div class="embed-responsive embed-responsive-16by9">
-        <iframe
-            class="embed-responsive-item"
-            type="text/html"
-            src="https://www.youtube.com/embed/${embedURL}"
-            frameborder="0"
-            allowFullScreen="true"
-            webkitallowfullscreen="true"
-            mozallowfullscreen="true"></iframe>
-    </div>`;
+    if (!embedURL) {
+        return str;
+    }
+
+    return renderEmbed({
+        type: 'text/html',
+        src: `https://www.youtube.com/embed/${embedURL}`,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 };

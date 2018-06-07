@@ -1,3 +1,6 @@
+import { EmbedOptions } from '../embed';
+import { renderEmbed } from '../../utils';
+
 const encodeURI = (uri: string): string => {
     return `https://docs.google.com/presentation/d/${encodeURIComponent(uri)}/embed`
         + `?start=false&loop=false&delayms=3000`;
@@ -12,19 +15,17 @@ const parseGoogleSlideURL = (code: string): string => {
     return encodeURI(code);
 };
 
-export default (code: string): string => {
+export default (code: string, options: EmbedOptions): string => {
     const embedURL = parseGoogleSlideURL(code);
     if (!embedURL) {
         return '';
     }
 
-    return `<div class="embed-responsive embed-responsive-16by9">
-        <iframe
-            class="embed-responsive-item"
-            src="${code}"
-            frameborder="0"
-            allowfullscreen="true"
-            mozallowfullscreen="true"
-            webkitallowfullscreen="true"></iframe>
-    </div>`;
+    return renderEmbed({
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 };

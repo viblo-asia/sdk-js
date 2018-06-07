@@ -1,3 +1,4 @@
+import { EmbedOptions } from './plugins/embed';
 import { MarkdownIt, Token, Renderer } from 'markdown-it';
 
 export type AlterTokenFunction = (token: Token) => Token;
@@ -15,4 +16,21 @@ export function alterToken(rule: string, alter: AlterTokenFunction, md: Markdown
     };
 
     return md;
+}
+
+export function renderEmbed(attrs: object, options: EmbedOptions) {
+    const iframeAttrs = Object.keys(attrs)
+        .map((key) => {
+            const value = attrs[key];
+
+            return value === true ? key : `${key}="${attrs[key]}"`;
+        })
+        .join(' ');
+
+    const iframeClassAttr = options.iframeClass ? `class="${options.iframeClass}"` : '';
+    const iframe = `<iframe ${iframeClassAttr} ${iframeAttrs}></iframe>`;
+
+    const wrapperClassAttr = options.wrapperClass ? `class="${options.wrapperClass}"` : '';
+
+    return `<div ${wrapperClassAttr}>${iframe}</div>`;
 }

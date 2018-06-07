@@ -9,19 +9,16 @@ import { alterToken } from './utils';
 import { createPlugin as createEmbedPlugin } from './plugins/embed';
 import { createDefinition as createMentionPlugin } from './plugins/linkify-mention';
 
-import codepen from './plugins/embeds/codepen';
-import jsfiddle from './plugins/embeds/jsfiddle';
-import gist from './plugins/embeds/gist';
-import googleslide from './plugins/embeds/google-slide';
-import createSlideshareRenderer from './plugins/embeds/slideshare';
-import vimeo from './plugins/embeds/vimeo';
-import youtube from './plugins/embeds/youtube';
+export interface EmbedOptions {
+    wrapperClass?: string;
+    iframeClass?: string;
+}
 
 export interface Options {
     /** Base URL */
-    baseURL: string;
+    baseURL?: string;
     /** Whether to render embedments or not */
-    embed?: boolean;
+    embed?: boolean | EmbedOptions;
     /** Should relative URLs be made to absolute */
     absoluteURL?: boolean;
 }
@@ -33,21 +30,7 @@ const defaultOptions: Options = {
 };
 
 export function createRenderer(options: Options) {
-    const mergedOptions = Object.assign({}, defaultOptions, options);
-
-    const slideshare = createSlideshareRenderer({
-        baseURL: mergedOptions.baseURL
-    });
-
-    const embedPlugin = createEmbedPlugin({
-        codepen,
-        jsfiddle,
-        gist,
-        googleslide,
-        vimeo,
-        youtube,
-        slideshare
-    });
+    const _options = Object.assign({}, defaultOptions, options);
 
     const md = Markdown({
         html: true,
@@ -60,24 +43,29 @@ export function createRenderer(options: Options) {
 
     md.use(katex, { throwOnError: false });
 
-    /* tslint:disable:align */
     alterToken('link_open', (token) => {
         token.attrPush(['target', '_blank']);
 
-        if (mergedOptions.absoluteURL) {
+        if (_options.absoluteURL) {
             const href = token.attrGet('href');
             if (href && href.startsWith('/')) {
-                token.attrSet('href', `${mergedOptions.baseURL}${href}`);
+                token.attrSet('href', `${_options.baseURL}${href}`);
             }
         }
 
         return token;
     }, md);
-    /* tslint:enable:align */
 
-    md.linkify.add('@', createMentionPlugin(`${mergedOptions.baseURL}/u`));
+    md.linkify.add('@', createMentionPlugin(`${_options.baseURL}/u`));
 
-    if (mergedOptions.embed !== false) {
+    if (_options.embed !== false) {
+        const embedOptions = typeof _options.embed === 'object' ? _options.embed : {};
+
+        const embedPlugin = createEmbedPlugin({
+            ...embedOptions,
+            baseURL: _options.baseURL
+        });
+
         md.use(embedPlugin);
     }
 

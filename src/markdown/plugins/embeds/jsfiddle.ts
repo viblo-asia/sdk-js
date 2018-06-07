@@ -1,4 +1,7 @@
-export default (code: string): string => {
+import { EmbedOptions } from '../embed';
+import { renderEmbed } from '../../utils';
+
+export default (code: string, options: EmbedOptions): string => {
     let embedUrl = code.replace(/^\/+|\/+$/gm, '')
         .replace(/(^http\:\/\/jsfiddle.net\/)|(^jsfiddle.net\/)/, 'https://jsfiddle.net/')
         .replace('/embed', '/embedded');
@@ -12,5 +15,8 @@ export default (code: string): string => {
         embedUrl = `${embedUrl}/embedded`;
     }
 
-    return `<iframe class="w-100" height="400" src="${embedUrl}"></iframe>`;
+    return renderEmbed({
+        src: embedUrl,
+        height: 400
+    }, options);
 };

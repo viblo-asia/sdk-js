@@ -1,3 +1,6 @@
+import { EmbedOptions } from '../embed';
+import { renderEmbed } from '../../utils';
+
 const parseSlideShareURL = (code: string, baseURL: string): string => {
     const isSlideShareID = /^([0-9])+$/.test(code);
     const isSlideShareURL = /^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/.+)$/.test(code);
@@ -18,19 +21,17 @@ const parseSlideShareURL = (code: string, baseURL: string): string => {
     return `${baseURL}/embed/slideshare/?url=${code}`;
 };
 
-export default ({ baseURL }) => (code: string): string => {
-    const embedURL = parseSlideShareURL(code, baseURL);
+export default (str: string, options: EmbedOptions): string => {
+    const embedURL = parseSlideShareURL(str, options.baseURL || '');
 
-    if (!embedURL) return code;
+    if (!embedURL) return str;
 
-    return `<div class="embed-responsive embed-responsive-16by9">
-        <iframe
-            class="embed-responsive-item"
-            type="text/html"
-            src="${embedURL}"
-            frameborder="0"
-            allowFullScreen="true"
-            webkitallowfullscreen="true"
-            mozallowfullscreen="true"></iframe>
-    </div>`;
+    return renderEmbed({
+        type: 'text/html',
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 };
