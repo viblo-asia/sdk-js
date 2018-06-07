@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("../../utils");
 var encodeURI = function (uri) {
     return "https://player.vimeo.com/video/" + encodeURIComponent(uri);
 };
@@ -14,10 +15,17 @@ var parseVimeoURL = function (code) {
     }
     return encodeURI(code);
 };
-exports.default = (function (code) {
-    var embedURL = parseVimeoURL(code);
+exports.default = (function (str, options) {
+    var embedURL = parseVimeoURL(str);
     if (!embedURL) {
-        return '';
+        return str;
     }
-    return "<div class=\"embed-responsive embed-responsive-16by9\">\n        <iframe\n            class=\"embed-responsive-item\"\n            type=\"text/html\"\n            src=\"" + embedURL + "\"\n            frameborder=\"0\"\n            webkitallowfullscreen\n            mozallowfullscreen\n            allowfullscreen></iframe>\n    </div>";
+    return utils_1.renderEmbed({
+        type: 'text/html',
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 });

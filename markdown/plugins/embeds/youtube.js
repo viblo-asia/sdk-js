@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("../../utils");
 var parseYoutubeURL = function (code) {
     if (code.startsWith('https://')) {
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -11,7 +12,17 @@ var parseYoutubeURL = function (code) {
     }
     return code;
 };
-exports.default = (function (code) {
-    var embedURL = parseYoutubeURL(code);
-    return !embedURL ? '' : "<div class=\"embed-responsive embed-responsive-16by9\">\n        <iframe\n            class=\"embed-responsive-item\"\n            type=\"text/html\"\n            src=\"https://www.youtube.com/embed/" + embedURL + "\"\n            frameborder=\"0\"\n            allowFullScreen=\"true\"\n            webkitallowfullscreen=\"true\"\n            mozallowfullscreen=\"true\"></iframe>\n    </div>";
+exports.default = (function (str, options) {
+    var embedURL = parseYoutubeURL(str);
+    if (!embedURL) {
+        return str;
+    }
+    return utils_1.renderEmbed({
+        type: 'text/html',
+        src: "https://www.youtube.com/embed/" + embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 });

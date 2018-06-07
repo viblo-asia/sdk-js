@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("../../utils");
 var parseCodepenURL = function (code) {
     var embedURL = code;
     if (!code.startsWith('https://codepen.io/')) {
@@ -7,7 +8,16 @@ var parseCodepenURL = function (code) {
     }
     return embedURL.replace(new RegExp('/pen/'), '/embed/');
 };
-exports.default = (function (code) {
-    var embedSrc = parseCodepenURL(code);
-    return "<iframe\n                class=\"w-100\"\n                height=\"400\"\n                src=\"" + embedSrc + "?height=400&theme-id=0&default-tab=js,result&embed-version=2\"\n                frameborder=\"no\"\n                allowtransparency=\"true\"\n                allowFullScreen=\"true\"\n                webkitallowfullscreen=\"true\"\n                mozallowfullscreen=\"true\"></iframe>";
+exports.default = (function (str, options) {
+    var embedSrc = parseCodepenURL(str);
+    var classAttr = options.iframeClass ? "class=\"" + options.iframeClass + "\"" : '';
+    return utils_1.renderEmbed({
+        height: 400,
+        src: embedSrc + "?height=400&theme-id=0&default-tab=js,result&embed-version=2",
+        frameborder: 0,
+        allowtransparency: true,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 });

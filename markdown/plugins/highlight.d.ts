@@ -1,1 +1,2 @@
-export default function (str: string, lang: string): any;
+import Markdown = require('markdown-it');
+export default function (md: Markdown.MarkdownIt): void;

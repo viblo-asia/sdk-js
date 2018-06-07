@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("../../utils");
 var encodeURI = function (uri) {
     return "https://docs.google.com/presentation/d/" + encodeURIComponent(uri) + "/embed"
         + "?start=false&loop=false&delayms=3000";
@@ -11,10 +12,16 @@ var parseGoogleSlideURL = function (code) {
     }
     return encodeURI(code);
 };
-exports.default = (function (code) {
+exports.default = (function (code, options) {
     var embedURL = parseGoogleSlideURL(code);
     if (!embedURL) {
         return '';
     }
-    return "<div class=\"embed-responsive embed-responsive-16by9\">\n        <iframe\n            class=\"embed-responsive-item\"\n            src=\"" + code + "\"\n            frameborder=\"0\"\n            allowfullscreen=\"true\"\n            mozallowfullscreen=\"true\"\n            webkitallowfullscreen=\"true\"></iframe>\n    </div>";
+    return utils_1.renderEmbed({
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 });

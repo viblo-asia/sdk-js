@@ -12,3 +12,16 @@ function alterToken(rule, alter, md) {
     return md;
 }
 exports.alterToken = alterToken;
+function renderEmbed(attrs, options) {
+    var iframeAttrs = Object.keys(attrs)
+        .map(function (key) {
+        var value = attrs[key];
+        return value === true ? key : key + "=\"" + attrs[key] + "\"";
+    })
+        .join(' ');
+    var iframeClassAttr = options.iframeClass ? "class=\"" + options.iframeClass + "\"" : '';
+    var iframe = "<iframe " + iframeClassAttr + " " + iframeAttrs + "></iframe>";
+    var wrapperClassAttr = options.wrapperClass ? "class=\"" + options.wrapperClass + "\"" : '';
+    return "<div " + wrapperClassAttr + ">" + iframe + "</div>";
+}
+exports.renderEmbed = renderEmbed;

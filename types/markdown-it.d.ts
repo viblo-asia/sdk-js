@@ -16,6 +16,7 @@ interface MarkdownItStatic {
 
 declare namespace MarkdownIt {
     interface MarkdownIt {
+        options: Options;
         block: ParserBlock;
         core: Core;
         helpers: any;

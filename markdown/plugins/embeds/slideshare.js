@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("../../utils");
 var parseSlideShareURL = function (code, baseURL) {
     var isSlideShareID = /^([0-9])+$/.test(code);
     var isSlideShareURL = /^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/.+)$/.test(code);
@@ -15,12 +16,16 @@ var parseSlideShareURL = function (code, baseURL) {
     }
     return baseURL + "/embed/slideshare/?url=" + code;
 };
-exports.default = (function (_a) {
-    var baseURL = _a.baseURL;
-    return function (code) {
-        var embedURL = parseSlideShareURL(code, baseURL);
-        if (!embedURL)
-            return code;
-        return "<div class=\"embed-responsive embed-responsive-16by9\">\n        <iframe\n            class=\"embed-responsive-item\"\n            type=\"text/html\"\n            src=\"" + embedURL + "\"\n            frameborder=\"0\"\n            allowFullScreen=\"true\"\n            webkitallowfullscreen=\"true\"\n            mozallowfullscreen=\"true\"></iframe>\n    </div>";
-    };
+exports.default = (function (str, options) {
+    var embedURL = parseSlideShareURL(str, options.baseURL || '');
+    if (!embedURL)
+        return str;
+    return utils_1.renderEmbed({
+        type: 'text/html',
+        src: embedURL,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 });
