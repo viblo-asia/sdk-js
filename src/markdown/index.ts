@@ -50,12 +50,12 @@ export function createRenderer(options: Options) {
     });
 
     const md = Markdown({
-        highlight,
         html: true,
         linkify: true
     });
 
     md.use(emoji);
+    md.use(highlight);
     md.renderer.rules.emoji = (token, idx) => twemoji.parse(token[idx].content);
 
     md.use(katex, { throwOnError: false });

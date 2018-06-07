@@ -1,100 +1,90 @@
-import hljs = require('highlight.js/lib/highlight');
+import Prism = require('prismjs');
+import Markdown = require('markdown-it');
+import { escapeHtml } from 'markdown-it/lib/common/utils';
 
-hljs.registerLanguage('accesslog', require('highlight.js/lib/languages/accesslog'));
-hljs.registerLanguage('actionscript', require('highlight.js/lib/languages/actionscript'));
-hljs.registerLanguage('apache', require('highlight.js/lib/languages/apache'));
-hljs.registerLanguage('cpp', require('highlight.js/lib/languages/cpp'));
-hljs.registerLanguage('arduino', require('highlight.js/lib/languages/arduino'));
-hljs.registerLanguage('armasm', require('highlight.js/lib/languages/armasm'));
-hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
-hljs.registerLanguage('asciidoc', require('highlight.js/lib/languages/asciidoc'));
-hljs.registerLanguage('avrasm', require('highlight.js/lib/languages/avrasm'));
-hljs.registerLanguage('awk', require('highlight.js/lib/languages/awk'));
-hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
-hljs.registerLanguage('basic', require('highlight.js/lib/languages/basic'));
-hljs.registerLanguage('clean', require('highlight.js/lib/languages/clean'));
-hljs.registerLanguage('clojure', require('highlight.js/lib/languages/clojure'));
-hljs.registerLanguage('clojure-repl', require('highlight.js/lib/languages/clojure-repl'));
-hljs.registerLanguage('cmake', require('highlight.js/lib/languages/cmake'));
-hljs.registerLanguage('coffeescript', require('highlight.js/lib/languages/coffeescript'));
-hljs.registerLanguage('cs', require('highlight.js/lib/languages/cs'));
-hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
-hljs.registerLanguage('d', require('highlight.js/lib/languages/d'));
-hljs.registerLanguage('markdown', require('highlight.js/lib/languages/markdown'));
-hljs.registerLanguage('dart', require('highlight.js/lib/languages/dart'));
-hljs.registerLanguage('delphi', require('highlight.js/lib/languages/delphi'));
-hljs.registerLanguage('diff', require('highlight.js/lib/languages/diff'));
-hljs.registerLanguage('django', require('highlight.js/lib/languages/django'));
-hljs.registerLanguage('dns', require('highlight.js/lib/languages/dns'));
-hljs.registerLanguage('dockerfile', require('highlight.js/lib/languages/dockerfile'));
-hljs.registerLanguage('dos', require('highlight.js/lib/languages/dos'));
-hljs.registerLanguage('dust', require('highlight.js/lib/languages/dust'));
-hljs.registerLanguage('elixir', require('highlight.js/lib/languages/elixir'));
-hljs.registerLanguage('elm', require('highlight.js/lib/languages/elm'));
-hljs.registerLanguage('ruby', require('highlight.js/lib/languages/ruby'));
-hljs.registerLanguage('erb', require('highlight.js/lib/languages/erb'));
-hljs.registerLanguage('erlang-repl', require('highlight.js/lib/languages/erlang-repl'));
-hljs.registerLanguage('erlang', require('highlight.js/lib/languages/erlang'));
-hljs.registerLanguage('gherkin', require('highlight.js/lib/languages/gherkin'));
-hljs.registerLanguage('go', require('highlight.js/lib/languages/go'));
-hljs.registerLanguage('gradle', require('highlight.js/lib/languages/gradle'));
-hljs.registerLanguage('haml', require('highlight.js/lib/languages/haml'));
-hljs.registerLanguage('handlebars', require('highlight.js/lib/languages/handlebars'));
-hljs.registerLanguage('haskell', require('highlight.js/lib/languages/haskell'));
-hljs.registerLanguage('haxe', require('highlight.js/lib/languages/haxe'));
-hljs.registerLanguage('hsp', require('highlight.js/lib/languages/hsp'));
-hljs.registerLanguage('htmlbars', require('highlight.js/lib/languages/htmlbars'));
-hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
-hljs.registerLanguage('ini', require('highlight.js/lib/languages/ini'));
-hljs.registerLanguage('java', require('highlight.js/lib/languages/java'));
-hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
-hljs.registerLanguage('json', require('highlight.js/lib/languages/json'));
-hljs.registerLanguage('kotlin', require('highlight.js/lib/languages/kotlin'));
-hljs.registerLanguage('less', require('highlight.js/lib/languages/less'));
-hljs.registerLanguage('lisp', require('highlight.js/lib/languages/lisp'));
-hljs.registerLanguage('livescript', require('highlight.js/lib/languages/livescript'));
-hljs.registerLanguage('lua', require('highlight.js/lib/languages/lua'));
-hljs.registerLanguage('makefile', require('highlight.js/lib/languages/makefile'));
-hljs.registerLanguage('matlab', require('highlight.js/lib/languages/matlab'));
-hljs.registerLanguage('perl', require('highlight.js/lib/languages/perl'));
-hljs.registerLanguage('nginx', require('highlight.js/lib/languages/nginx'));
-hljs.registerLanguage('nix', require('highlight.js/lib/languages/nix'));
-hljs.registerLanguage('objectivec', require('highlight.js/lib/languages/objectivec'));
-hljs.registerLanguage('openscad', require('highlight.js/lib/languages/openscad'));
-hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
-hljs.registerLanguage('powershell', require('highlight.js/lib/languages/powershell'));
-hljs.registerLanguage('processing', require('highlight.js/lib/languages/processing'));
-hljs.registerLanguage('profile', require('highlight.js/lib/languages/profile'));
-hljs.registerLanguage('protobuf', require('highlight.js/lib/languages/protobuf'));
-hljs.registerLanguage('python', require('highlight.js/lib/languages/python'));
-hljs.registerLanguage('q', require('highlight.js/lib/languages/q'));
-hljs.registerLanguage('qml', require('highlight.js/lib/languages/qml'));
-hljs.registerLanguage('r', require('highlight.js/lib/languages/r'));
-hljs.registerLanguage('rsl', require('highlight.js/lib/languages/rsl'));
-hljs.registerLanguage('rust', require('highlight.js/lib/languages/rust'));
-hljs.registerLanguage('scala', require('highlight.js/lib/languages/scala'));
-hljs.registerLanguage('scss', require('highlight.js/lib/languages/scss'));
-hljs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
-hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
-hljs.registerLanguage('stan', require('highlight.js/lib/languages/stan'));
-hljs.registerLanguage('step21', require('highlight.js/lib/languages/step21'));
-hljs.registerLanguage('stylus', require('highlight.js/lib/languages/stylus'));
-hljs.registerLanguage('swift', require('highlight.js/lib/languages/swift'));
-hljs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'));
-hljs.registerLanguage('tex', require('highlight.js/lib/languages/tex'));
-hljs.registerLanguage('tp', require('highlight.js/lib/languages/tp'));
-hljs.registerLanguage('twig', require('highlight.js/lib/languages/twig'));
-hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
-hljs.registerLanguage('vbnet', require('highlight.js/lib/languages/vbnet'));
-hljs.registerLanguage('vbscript', require('highlight.js/lib/languages/vbscript'));
-hljs.registerLanguage('vim', require('highlight.js/lib/languages/vim'));
+require('prismjs/components/prism-actionscript');
+require('prismjs/components/prism-c');
+require('prismjs/components/prism-cpp');
+require('prismjs/components/prism-arduino');
+require('prismjs/components/prism-bash');
+require('prismjs/components/prism-basic');
+require('prismjs/components/prism-clojure');
+require('prismjs/components/prism-coffeescript');
+require('prismjs/components/prism-csharp');
+require('prismjs/components/prism-d');
+require('prismjs/components/prism-dart');
+require('prismjs/components/prism-diff');
+// require('prismjs/components/prism-django');
+require('prismjs/components/prism-docker');
+require('prismjs/components/prism-elixir');
+require('prismjs/components/prism-elm');
+require('prismjs/components/prism-markup-templating');
+require('prismjs/components/prism-ruby');
+require('prismjs/components/prism-erb');
+require('prismjs/components/prism-erlang');
+require('prismjs/components/prism-gherkin');
+require('prismjs/components/prism-go');
+require('prismjs/components/prism-graphql');
+require('prismjs/components/prism-haml');
+require('prismjs/components/prism-handlebars');
+require('prismjs/components/prism-haskell');
+require('prismjs/components/prism-haxe');
+require('prismjs/components/prism-http');
+require('prismjs/components/prism-ini');
+require('prismjs/components/prism-java');
+require('prismjs/components/prism-json');
+require('prismjs/components/prism-kotlin');
+require('prismjs/components/prism-latex');
+require('prismjs/components/prism-less');
+require('prismjs/components/prism-lisp');
+require('prismjs/components/prism-livescript');
+require('prismjs/components/prism-lua');
+require('prismjs/components/prism-makefile');
+require('prismjs/components/prism-matlab');
+require('prismjs/components/prism-nginx');
+require('prismjs/components/prism-nix');
+require('prismjs/components/prism-objectivec');
+require('prismjs/components/prism-pascal');
+require('prismjs/components/prism-perl');
+require('prismjs/components/prism-php');
+require('prismjs/components/prism-sql');
+require('prismjs/components/prism-plsql');
+require('prismjs/components/prism-powershell');
+require('prismjs/components/prism-protobuf');
+require('prismjs/components/prism-python');
+require('prismjs/components/prism-q');
+require('prismjs/components/prism-r');
+require('prismjs/components/prism-rust');
+require('prismjs/components/prism-sass');
+require('prismjs/components/prism-scala');
+require('prismjs/components/prism-scss');
+require('prismjs/components/prism-stylus');
+require('prismjs/components/prism-swift');
+require('prismjs/components/prism-twig');
+require('prismjs/components/prism-typescript');
+require('prismjs/components/prism-vbnet');
+require('prismjs/components/prism-wasm');
+require('prismjs/components/prism-yaml');
 
-export default function (str: string, lang: string) {
-    try {
-        return lang && hljs.getLanguage(lang)
-            ? hljs.highlight(lang, str).value
-            : hljs.highlightAuto(str).value;
-    } catch (e) {
-        return str;
-    }
+interface Options {
+    langPrefix?: string;
+}
+
+function createHighlighter(options: Options) {
+    return (str: string, lang: string) => {
+        const prismLang = Prism.languages[lang];
+        const code = prismLang
+            ? Prism.highlight(str, prismLang)
+            : escapeHtml(str);
+
+        const languageClass = `${options.langPrefix}${lang || 'none'}`;
+
+        return `<pre class="${languageClass}"><code class="${languageClass}">${code}</code></pre>`;
+    };
+}
+
+export default function (md: Markdown.MarkdownIt) {
+    md.options.highlight = createHighlighter({
+        langPrefix: md.options.langPrefix
+    });
 }
