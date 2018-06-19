@@ -67,7 +67,7 @@ require('prismjs/components/prism-wasm');
 require('prismjs/components/prism-yaml');
 function createHighlighter(options) {
     return function (str, lang) {
-        var prismLang = Prism.languages[lang];
+        var prismLang = Prism.languages[lang.toLowerCase()];
         var code = prismLang
             ? Prism.highlight(str, prismLang)
             : utils_1.escapeHtml(str);
