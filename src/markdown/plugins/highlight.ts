@@ -72,7 +72,7 @@ interface Options {
 
 function createHighlighter(options: Options) {
     return (str: string, lang: string) => {
-        const prismLang = Prism.languages[lang];
+        const prismLang = Prism.languages[lang.toLowerCase()];
         const code = prismLang
             ? Prism.highlight(str, prismLang)
             : escapeHtml(str);
