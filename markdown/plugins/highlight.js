@@ -33,6 +33,7 @@ require('prismjs/components/prism-http');
 require('prismjs/components/prism-ini');
 require('prismjs/components/prism-java');
 require('prismjs/components/prism-json');
+require('prismjs/components/prism-jsx');
 require('prismjs/components/prism-kotlin');
 require('prismjs/components/prism-latex');
 require('prismjs/components/prism-less');
