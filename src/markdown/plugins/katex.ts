@@ -1,7 +1,8 @@
 // A modified version of https://github.com/waylonflinn/markdown-it-katex
 
 import katex = require('katex/dist/katex');
-import { MarkdownIt, Options, StateInline, StateBlock } from 'markdown-it';
+import { MarkdownIt, StateInline, StateBlock } from 'markdown-it';
+import { escape } from '../utils';
 
 function isValidClosing(state: StateInline, pos: number) {
     const max = state.posMax;
@@ -174,7 +175,7 @@ function render(content: string, options: any) {
             console.error(error);
         }
 
-        return content;
+        return escape(content);
     }
 }
 

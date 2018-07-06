@@ -18,6 +18,27 @@ export function alterToken(rule: string, alter: AlterTokenFunction, md: Markdown
     return md;
 }
 
+/**
+ * https://github.com/lodash/lodash/blob/master/escape.js
+ */
+const htmlEscapes = {
+    '&': '&amp',
+    '<': '&lt',
+    '>': '&gt',
+    '"': '&quot',
+    '\'': '&#39'
+};
+
+/** Used to match HTML entities and HTML characters. */
+const reUnescapedHtml = /[&<>"']/g;
+const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+
+export function escape(string) {
+    return (string && reHasUnescapedHtml.test(string))
+      ? string.replace(reUnescapedHtml, chr => htmlEscapes[chr])
+      : string;
+}
+
 export function renderEmbed(attrs: object, options: EmbedOptions) {
     const iframeAttrs = Object.keys(attrs)
         .map((key) => {
