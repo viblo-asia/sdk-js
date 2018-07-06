@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 
 export const getApiKeys = () => axios.get('/oauth/personal-access-tokens').then(_ => _.data);
 

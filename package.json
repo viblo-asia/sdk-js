@@ -12,23 +12,23 @@
     "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src"
   },
   "devDependencies": {
-    "@types/node": "^10.1.3",
+    "@types/node": "^10.5.2",
     "@types/prismjs": "^1.9.0",
     "fs-extra": "^6.0.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.9.2",
     "typedoc": "^0.11.1",
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "katex": "^0.9.0",
+    "katex": "^0.10.0-beta",
     "laravel-echo": "^1.4.0",
     "markdown-it": "^8.4.1",
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-sanitizer": "^0.4.3",
-    "prismjs": "^1.14.0",
-    "twemoji": "^2.5.1"
+    "prismjs": "^1.15.0",
+    "twemoji": "^11.0.0"
   }
 }

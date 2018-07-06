@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import {
     Question,
     QuestionFull,

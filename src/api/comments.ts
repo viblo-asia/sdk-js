@@ -1,9 +1,8 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import { PagedResource } from '../types/api';
 import { CommentableType } from '../libs/interactions';
 
-export interface Comment {
+interface Comment {
     id: number;
     hash_id: string;
     user_id: number;
@@ -19,7 +18,7 @@ export interface Comment {
     updated_at: string;
 }
 
-export interface CommentInput {
+interface CommentInput {
     comment_contents: string;
     ancestor_id: number;
 }

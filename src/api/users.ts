@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import {
     Post,
     Series,
@@ -11,7 +10,7 @@ import {
     PagedResource
 } from '../types/api';
 
-export interface Profile extends UserItem {
+interface Profile extends UserItem {
     social_accounts: SocialAccount[];
 }
 

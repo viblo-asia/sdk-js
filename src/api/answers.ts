@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 
 export const getAnswer = (answer: string) =>
     axios.get(`/answers/${answer}`);

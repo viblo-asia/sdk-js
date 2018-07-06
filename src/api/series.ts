@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import { Series, SeriesFull, Post, Request, PagedResource } from '../types/api';
 
 export const getSeriesFeed = (params?: Request): Promise<PagedResource<Series>> =>

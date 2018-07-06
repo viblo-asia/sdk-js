@@ -1,8 +1,6 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
-import { Request } from '../types/api';
 
-export interface PostEdit {
+interface PostEdit {
 
 }
 

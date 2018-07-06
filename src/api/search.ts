@@ -1,5 +1,4 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import { PagedResource } from '../types/api';
 
 export enum SearchType {
@@ -7,13 +6,13 @@ export enum SearchType {
     Question = 'questions'
 }
 
-export interface SearchRequest {
+interface SearchRequest {
     q: string;
     s: string;
     o: string;
 }
 
-export interface SearchResult {
+interface SearchResult {
     highlights: {
         title: string[];
         contents: string[];

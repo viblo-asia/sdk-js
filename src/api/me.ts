@@ -1,9 +1,8 @@
 import axios from '../libs/axios';
-import { AxiosPromise } from 'axios';
 import { Request, PagedResource } from '../types/api';
 import { SubscribableType } from '../libs/interactions';
 
-export interface UserSelf {
+interface UserSelf {
     id: string;
     name: string;
     email: string;
@@ -14,7 +13,7 @@ export interface UserSelf {
     reputation: number;
 }
 
-export interface UploadedFile {
+interface UploadedFile {
     id: string;
     name: string;
     path: string;

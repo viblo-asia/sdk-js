@@ -1,11 +1,9 @@
-import { OAuthToken } from './auth';
-
-export interface OAuthConfig {
+interface OAuthConfig {
     client_id: string;
     client_secret: string;
 }
 
-export interface ConfigOption {
+interface ConfigOption {
     oauth?: OAuthConfig;
 }
 

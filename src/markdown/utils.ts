@@ -1,7 +1,7 @@
 import { EmbedOptions } from './plugins/embed';
 import { MarkdownIt, Token, Renderer } from 'markdown-it';
 
-export type AlterTokenFunction = (token: Token) => Token;
+type AlterTokenFunction = (token: Token) => Token;
 
 export function alterToken(rule: string, alter: AlterTokenFunction, md: MarkdownIt): MarkdownIt {
     const renderer = md.renderer.rules[rule]

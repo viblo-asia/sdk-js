@@ -1,6 +1,5 @@
 // Why, Laravel echo? Whyyyyyyyyyyyyy ლ(ಠ益ಠ)ლ
 import Echo = require('laravel-echo');
-import { Channel } from 'laravel-echo/src/channel';
 import { getCurrentToken, OAuthToken } from '../auth';
 import PrivateChannel from './PrivateChannel';
 import NewPostsChannel from './NewPostsChannel';
