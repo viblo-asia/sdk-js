@@ -3,6 +3,11 @@
   "version": "0.1.0-beta.1",
   "main": "sdk.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viblo-asia/sdk-js"
+  },
+  "homepage": "https://viblo.asia",
   "scripts": {
     "dev": "rimraf dist && tsc -w",
     "compile": "rimraf dist && tsc",
