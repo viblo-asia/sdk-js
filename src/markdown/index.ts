@@ -41,7 +41,10 @@ export function createRenderer(options: Options) {
     md.use(highlight);
     md.renderer.rules.emoji = (token, idx) => twemoji.parse(token[idx].content);
 
-    md.use(katex, { throwOnError: false });
+    md.use(katex, {
+        throwOnError: false,
+        strict: false
+    });
 
     alterToken('link_open', (token) => {
         token.attrPush(['target', '_blank']);

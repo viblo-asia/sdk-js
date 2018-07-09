@@ -179,12 +179,12 @@ function render(content: string, options: any) {
     }
 }
 
-export default function (md: MarkdownIt) {
+export default function (md: MarkdownIt, options: object) {
     md.inline.ruler.after('escape', 'math_inline', math_inline);
     md.block.ruler.after('blockquote', 'math_block', math_block, {
         alt: ['paragraph', 'reference', 'blockquote', 'list']
     });
 
-    md.renderer.rules.math_inline = (tokens, idx) => render(tokens[idx].content, { displayMode: false });
-    md.renderer.rules.math_block = (tokens, idx) => render(tokens[idx].content, { displayMode: true });
+    md.renderer.rules.math_inline = (tokens, idx) => render(tokens[idx].content, { ...options, displayMode: false });
+    md.renderer.rules.math_block = (tokens, idx) => render(tokens[idx].content, { ...options, displayMode: true });
 }
