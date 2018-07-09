@@ -1,7 +1,16 @@
 "use strict";
 // A modified version of https://github.com/waylonflinn/markdown-it-katex
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var katex = require("katex/dist/katex");
+var utils_1 = require("../utils");
 function isValidClosing(state, pos) {
     var max = state.posMax;
     var nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1;
@@ -134,18 +143,15 @@ function render(content, options) {
             : katex.renderToString(content, options);
     }
     catch (error) {
-        if (options.throwOnError) {
-            console.error(error);
-        }
-        return content;
+        return utils_1.escape(content);
     }
 }
-function default_1(md) {
+function default_1(md, options) {
     md.inline.ruler.after('escape', 'math_inline', math_inline);
     md.block.ruler.after('blockquote', 'math_block', math_block, {
         alt: ['paragraph', 'reference', 'blockquote', 'list']
     });
-    md.renderer.rules.math_inline = function (tokens, idx) { return render(tokens[idx].content, { displayMode: false }); };
-    md.renderer.rules.math_block = function (tokens, idx) { return render(tokens[idx].content, { displayMode: true }); };
+    md.renderer.rules.math_inline = function (tokens, idx) { return render(tokens[idx].content, __assign({}, options, { displayMode: false })); };
+    md.renderer.rules.math_block = function (tokens, idx) { return render(tokens[idx].content, __assign({}, options, { displayMode: true })); };
 }
 exports.default = default_1;

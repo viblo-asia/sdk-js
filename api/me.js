@@ -24,8 +24,8 @@ exports.setSocialPrivacy = function (service, value) {
 exports.getNotificationSettings = function () { return axios_1.default.get('/me/settings/notification').then(function (_) { return _.data; }); };
 exports.getServiceSettings = function () { return axios_1.default.get('/me/settings/service').then(function (_) { return _.data; }); };
 exports.updateSettings = function (name, value) {
-    return axios_1.default.put('/me/settings', (_a = {}, _a[name] = value, _a));
     var _a;
+    return axios_1.default.put('/me/settings', (_a = {}, _a[name] = value, _a));
 };
 // Subscriptions
 function subscribe(type, key, value) {

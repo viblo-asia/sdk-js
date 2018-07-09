@@ -12,6 +12,25 @@ function alterToken(rule, alter, md) {
     return md;
 }
 exports.alterToken = alterToken;
+/**
+ * https://github.com/lodash/lodash/blob/master/escape.js
+ */
+var htmlEscapes = {
+    '&': '&amp',
+    '<': '&lt',
+    '>': '&gt',
+    '"': '&quot',
+    '\'': '&#39'
+};
+/** Used to match HTML entities and HTML characters. */
+var reUnescapedHtml = /[&<>"']/g;
+var reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+function escape(string) {
+    return (string && reHasUnescapedHtml.test(string))
+        ? string.replace(reUnescapedHtml, function (chr) { return htmlEscapes[chr]; })
+        : string;
+}
+exports.escape = escape;
 function renderEmbed(attrs, options) {
     var iframeAttrs = Object.keys(attrs)
         .map(function (key) {

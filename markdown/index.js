@@ -31,7 +31,10 @@ function createRenderer(options) {
     md.use(emoji);
     md.use(highlight_1.default);
     md.renderer.rules.emoji = function (token, idx) { return twemoji.parse(token[idx].content); };
-    md.use(katex_1.default, { throwOnError: false });
+    md.use(katex_1.default, {
+        throwOnError: true,
+        strict: true
+    });
     utils_1.alterToken('link_open', function (token) {
         token.attrPush(['target', '_blank']);
         if (_options.absoluteURL) {

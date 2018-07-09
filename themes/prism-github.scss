@@ -1,0 +1,115 @@
+/**
+ * GitHub like syntax coloring
+ */
+
+code[class*='language-'],
+pre[class*='language-'] {
+    color: #24292e;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.45;
+
+    tab-size: 4;
+    hyphens: none;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
+    background: #b3d4fc;
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+    background: #b3d4fc;
+}
+
+pre[class*='language-'] {
+    padding: 1em;
+    overflow: auto;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+.token {
+    &.delimiter,
+    &.entity,
+    &.url,
+    &.variable,
+    &.constant {
+        color: #24292e;
+    }
+
+    &.atrule,
+    &.namespace,
+    &.operator,
+    &.keyword {
+        color: #d73a49;
+    }
+
+    &.package,
+    &.number,
+    &.boolean,
+    &.symbol {
+        color: #005cc5;
+    }
+
+    &.tag,
+    &.selector {
+        color: #22863a;
+    }
+
+    &.function,
+    &.class-name,
+    &.attr-name {
+        color: #6f42c1;
+    }
+
+    &.string,
+    &.attr-value,
+    &.property,
+    &.regex {
+        color: #032f62;
+    }
+
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+        color: #6a737d;
+    }
+}
+
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.language-diff {
+    .token {
+        &.inserted {
+            color: #22863a;
+            background-color: #f0fff4;
+        }
+
+        &.deleted {
+            color: #b31d28;
+            background-color: #ffeef0;
+        }
+
+        &.important {
+            color: #e36209;
+            background-color: #ffebda;
+        }
+    }
+}

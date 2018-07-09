@@ -1,5 +1,5 @@
 import { Post, Series, Question, UserItem, TagItem, SocialAccount, Request, PagedResource } from '../types/api';
-export interface Profile extends UserItem {
+interface Profile extends UserItem {
     social_accounts: SocialAccount[];
 }
 export declare const getProfile: (username: string, params?: object | undefined) => Promise<Profile>;
@@ -10,3 +10,4 @@ export declare const getUserSeries: (username: string, params?: Request | undefi
 export declare const getUserFollowers: (username: string, params?: Request | undefined) => Promise<PagedResource<UserItem>>;
 export declare const getUserFollowings: (username: string, params?: Request | undefined) => Promise<PagedResource<UserItem>>;
 export declare const getUserFollowingTags: (username: string, params?: Request | undefined) => Promise<PagedResource<TagItem>>;
+export {};
