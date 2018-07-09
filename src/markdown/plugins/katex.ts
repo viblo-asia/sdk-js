@@ -171,10 +171,6 @@ function render(content: string, options: any) {
             ? '<p>' + katex.renderToString(content, options) + '</p>'
             : katex.renderToString(content, options);
     } catch (error) {
-        if (options.throwOnError) {
-            console.error(error);
-        }
-
         return escape(content);
     }
 }

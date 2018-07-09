@@ -42,8 +42,8 @@ export function createRenderer(options: Options) {
     md.renderer.rules.emoji = (token, idx) => twemoji.parse(token[idx].content);
 
     md.use(katex, {
-        throwOnError: false,
-        strict: false
+        throwOnError: true,
+        strict: true
     });
 
     alterToken('link_open', (token) => {
