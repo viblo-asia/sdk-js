@@ -2,7 +2,7 @@ const fse = require('fs-extra');
 
 fse.copy('src/types', 'dist/types');
 
-const files = ['package.json', 'yarn.lock', 'README.md'];
+const files = ['package.json', 'yarn.lock', 'README.md', 'themes'];
 
 files.forEach(file =>
     fse.copy(file, `dist/${file}`)
