@@ -1,23 +1,14 @@
 import { MarkdownIt, StateInline, Token } from 'markdown-it';
+import providers from './embeds';
 
-import gist from './embeds/gist';
-import vimeo from './embeds/vimeo';
-import codepen from './embeds/codepen';
-import youtube from './embeds/youtube';
-import jsfiddle from './embeds/jsfiddle';
-import slideshare from './embeds/slideshare';
-import googleslide from './embeds/google-slide';
+const regexp = /{@(embed|gist|vimeo|codepen|youtube|jsfiddle|slideshare|googleslide)\s*:\s*([\S]+?)}/;
 
-const regexp = /{@(\w+)\s*:\s*([\S]+?)}/;
-
-const sites = {
-    gist,
-    vimeo,
-    codepen,
-    youtube,
-    jsfiddle,
-    slideshare,
-    googleslide
+const detectEmbedProvider = (embedURL: string) => {
+    for (const name in providers) {
+        if ((new providers[name]).parseEmbedURL(embedURL)) {
+            return name;
+        }
+    }
 };
 
 function parse(state: StateInline) {
@@ -28,11 +19,11 @@ function parse(state: StateInline) {
     if (!match) return false;
 
     const token = state.push('at-embed', 'embed', state.level);
-    token.meta = {
-        site: match[1]
-    };
+    const embedURL = match[2];
+    const embedProvider = match[1] === 'embed' ? detectEmbedProvider(embedURL) : match[1];
 
-    token.content = match[2];
+    token.meta = { embedProvider };
+    token.content = embedURL;
 
     state.pos += match[0].length;
 
@@ -41,22 +32,24 @@ function parse(state: StateInline) {
 
 const render = (renderers: Object, options: EmbedOptions) => function (tokens: Token[], idx: number) {
     const token = tokens[idx];
-    const site = token.meta.site;
+    const name = token.meta.embedProvider;
+    const provider = new renderers[name];
 
-    const render = renderers[site];
-
-    return typeof render === 'function'
-        ? render(token.content, options)
-        : token.content;
+    return provider ? provider.render(token.content, options) : token.content;
 };
 
 export const createPlugin = (options: EmbedOptions) => function (md: MarkdownIt) {
     md.inline.ruler.push('at-embed', parse);
-    md.renderer.rules['at-embed'] = render(sites, options);
+    md.renderer.rules['at-embed'] = render(providers, options);
 };
 
 export interface EmbedOptions {
     baseURL?: string;
     wrapperClass?: string;
     iframeClass?: string;
+}
+
+export interface EmbedProvider {
+    parseEmbedURL(code: string): string;
+    render(code: string, options: EmbedOptions): string;
 }

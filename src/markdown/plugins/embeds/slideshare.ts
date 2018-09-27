@@ -1,37 +1,39 @@
-import { EmbedOptions } from '../embed';
+import { EmbedOptions, EmbedProvider } from '../embed';
 import { renderEmbed } from '../../utils';
 
-const parseSlideShareURL = (code: string, baseURL: string): string => {
-    const isSlideShareID = /^([0-9])+$/.test(code);
-    const isSlideShareURL = /^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/.+)$/.test(code);
-    const matchesEmbed = code.match(/^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/slideshow\/embed_code\/.+)$/);
+export default class SlideShare implements EmbedProvider {
+    parseEmbedURL(code: string): string {
+        const isSlideShareID = /^([0-9])+$/.test(code);
+        const isSlideShareURL = /^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/.+)$/.test(code);
+        const matchEmbedURL = code.match(/^(?:(?:http|https):\/\/)?(?:www\.)?(slideshare\.net\/slideshow\/embed_code\/.+)$/); // tslint:disable-line
 
-    if (isSlideShareID) {
-        return `https://slideshare.net/slideshow/embed_code/${code}`;
+        if (isSlideShareID) {
+            return `https://slideshare.net/slideshow/embed_code/${code}`;
+        }
+
+        if (!isSlideShareURL) {
+            return '';
+        }
+
+        if (matchEmbedURL) {
+            return `https://${matchEmbedURL[1]}`;
+        }
+
+        return `https://viblo.asia/embed/slideshare/?url=${code}`;
     }
 
-    if (!isSlideShareURL) {
-        return '';
+    render(code: string, options: EmbedOptions): string {
+        const embedURL = this.parseEmbedURL(code);
+
+        if (!embedURL) return code;
+
+        return renderEmbed({
+            type: 'text/html',
+            src: embedURL,
+            frameborder: 0,
+            webkitallowfullscreen: true,
+            mozallowfullscreen: true,
+            allowfullscreen: true
+        }, options);
     }
-
-    if (matchesEmbed) {
-        return `https://${matchesEmbed[1]}`;
-    }
-
-    return `${baseURL}/embed/slideshare/?url=${code}`;
-};
-
-export default (str: string, options: EmbedOptions): string => {
-    const embedURL = parseSlideShareURL(str, options.baseURL || '');
-
-    if (!embedURL) return str;
-
-    return renderEmbed({
-        type: 'text/html',
-        src: embedURL,
-        frameborder: 0,
-        webkitallowfullscreen: true,
-        mozallowfullscreen: true,
-        allowfullscreen: true
-    }, options);
-};
+}
