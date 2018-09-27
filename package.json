@@ -9,7 +9,7 @@
   },
   "homepage": "https://viblo.asia",
   "scripts": {
-    "dev": "rimraf dist && tsc -w",
+    "dev": "rimraf dist && yarn build:copy && tsc -w",
     "compile": "rimraf dist && tsc",
     "build:copy": "node ./scripts/copy-files.js",
     "build": "yarn compile && yarn build:copy",

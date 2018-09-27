@@ -1,4 +1,4 @@
-import { EmbedOptions } from '../embed';
+import { EmbedOptions, EmbedProvider } from '../embed';
 import { renderEmbed } from '../../utils';
 
 const encodeURI = (uri: string): string => {
@@ -6,26 +6,27 @@ const encodeURI = (uri: string): string => {
         + `?start=false&loop=false&delayms=3000`;
 };
 
-const parseGoogleSlideURL = (code: string): string => {
-    if (code.startsWith('https://docs.google.com/presentation/d/')) {
-        const match = code.match(/[-\w]{25,}/);
-        return !match ? '' : encodeURI(match[0]);
+export default class GoogleSlide implements EmbedProvider {
+    parseEmbedURL(code: string): string {
+        if (code.startsWith('https://docs.google.com/presentation/d/')) {
+            const match = code.match(/[-\w]{25,}/);
+            return !match ? '' : encodeURI(match[0]);
+        }
+
+        return encodeURI(code);
     }
 
-    return encodeURI(code);
-};
+    render(code: string, options: EmbedOptions): string {
+        const embedURL = this.parseEmbedURL(code);
 
-export default (code: string, options: EmbedOptions): string => {
-    const embedURL = parseGoogleSlideURL(code);
-    if (!embedURL) {
-        return '';
+        if (!embedURL) return code;
+
+        return renderEmbed({
+            src: embedURL,
+            frameborder: 0,
+            webkitallowfullscreen: true,
+            mozallowfullscreen: true,
+            allowfullscreen: true
+        }, options);
     }
-
-    return renderEmbed({
-        src: embedURL,
-        frameborder: 0,
-        webkitallowfullscreen: true,
-        mozallowfullscreen: true,
-        allowfullscreen: true
-    }, options);
-};
+}
