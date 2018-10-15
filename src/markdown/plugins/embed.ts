@@ -1,24 +1,7 @@
 import { MarkdownIt, StateInline, Token } from 'markdown-it';
+import { renderEmbed } from '../utils';
 
-import gist from './embeds/gist';
-import vimeo from './embeds/vimeo';
-import codepen from './embeds/codepen';
-import youtube from './embeds/youtube';
-import jsfiddle from './embeds/jsfiddle';
-import slideshare from './embeds/slideshare';
-import googleslide from './embeds/google-slide';
-
-const regexp = /{@(\w+)\s*:\s*([\S]+?)}/;
-
-const sites = {
-    gist,
-    vimeo,
-    codepen,
-    youtube,
-    jsfiddle,
-    slideshare,
-    googleslide
-};
+const regexp = /{@(embed|gist|vimeo|codepen|youtube|jsfiddle|slideshare|googleslide)\s*:\s*([\S]+?)}/;
 
 function parse(state: StateInline) {
     if (state.src.charCodeAt(state.pos) !== 123) return false;
@@ -27,32 +10,36 @@ function parse(state: StateInline) {
 
     if (!match) return false;
 
+    const provider = match[1] === 'embed' ? null : match[1];
+    const url = match[2];
     const token = state.push('at-embed', 'embed', state.level);
-    token.meta = {
-        site: match[1]
-    };
 
-    token.content = match[2];
-
+    token.meta = { provider };
+    token.content = url;
     state.pos += match[0].length;
 
     return true;
 }
 
-const render = (renderers: Object, options: EmbedOptions) => function (tokens: Token[], idx: number) {
+const render = (options: EmbedOptions) => function (tokens: Token[], idx: number) {
     const token = tokens[idx];
-    const site = token.meta.site;
+    const baseURL = options.baseURL;
+    const provider = token.meta.provider;
+    const url = token.content;
 
-    const render = renderers[site];
-
-    return typeof render === 'function'
-        ? render(token.content, options)
-        : token.content;
+    return renderEmbed({
+        type: 'text/html',
+        src: `${baseURL}/embed?url=${url}&provider=${provider}`,
+        frameborder: 0,
+        webkitallowfullscreen: true,
+        mozallowfullscreen: true,
+        allowfullscreen: true
+    }, options);
 };
 
 export const createPlugin = (options: EmbedOptions) => function (md: MarkdownIt) {
     md.inline.ruler.push('at-embed', parse);
-    md.renderer.rules['at-embed'] = render(sites, options);
+    md.renderer.rules['at-embed'] = render(options);
 };
 
 export interface EmbedOptions {
