@@ -1,6 +1,6 @@
 {
   "name": "viblo-sdk",
-  "version": "0.1.0-beta.4",
+  "version": "0.1.0-beta.5",
   "main": "sdk.js",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "build:copy": "node ./scripts/copy-files.js",
     "build": "yarn compile && yarn build:copy",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src"
+    "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src",
+    "publish": "yarn build && yarn publish dist"
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
