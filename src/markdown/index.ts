@@ -1,4 +1,4 @@
-import twemoji = require('twemoji');
+import twemoji from 'twemoji';
 import Markdown = require('markdown-it');
 import emoji = require('markdown-it-emoji');
 import sanitize = require('markdown-it-sanitizer');
