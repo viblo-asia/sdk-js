@@ -633,9 +633,9 @@ tsutils@^2.21.0:
   dependencies:
     tslib "^1.8.1"
 
-twemoji@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/twemoji/-/twemoji-11.0.0.tgz#7eec57d12bfd1fffe8d5e7f05da0b6422a60790f"
+twemoji@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/twemoji/-/twemoji-11.2.0.tgz#3627c3607321bb784bcfb5b65b3b21309c031fa3"
 
 typedoc-default-themes@^0.5.0:
   version "0.5.0"

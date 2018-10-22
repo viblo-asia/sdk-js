@@ -34,6 +34,6 @@
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-sanitizer": "^0.4.3",
     "prismjs": "^1.15.0",
-    "twemoji": "^11.0.0"
+    "twemoji": "^11.2.0"
   }
 }
