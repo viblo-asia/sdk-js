@@ -32,7 +32,7 @@
     "laravel-echo": "^1.4.0",
     "markdown-it": "^8.4.1",
     "markdown-it-emoji": "^1.4.0",
-    "markdown-it-sanitizer": "^0.4.3",
+    "markdown-it-sanitizer": "https://github.com/huukimit/markdown-it-sanitizer#e048f8a",
     "prismjs": "^1.15.0",
     "twemoji": "^11.2.0"
   }

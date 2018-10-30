@@ -72,7 +72,7 @@ export function createRenderer(options: Options) {
         md.use(embedPlugin);
     }
 
-    md.use(sanitize);
+    md.use(sanitize, { align: true });
 
     return md;
 }
