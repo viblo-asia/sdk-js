@@ -81,10 +81,6 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ansi-styles@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
-
 argparse@^1.0.7:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
@@ -154,14 +150,6 @@ chalk@^2.3.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@~0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-0.4.0.tgz#5199a3ddcd0c1efe23bc08c1b027b06176e0c64f"
-  dependencies:
-    ansi-styles "~1.0.0"
-    has-color "~0.1.0"
-    strip-ansi "~0.1.0"
-
 clipboard@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.1.tgz#a12481e1c13d8a50f5f036b0560fe5d16d74e46a"
@@ -191,6 +179,10 @@ color-name@^1.1.1:
 commander@^2.12.1:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
+
+commander@^2.16.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -304,10 +296,6 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
-has-color@~0.1.0:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/has-color/-/has-color-0.1.7.tgz#67144a5260c34fc3cca677d041daf52fe7b78b2f"
-
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -356,12 +344,11 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-katex@^0.10.0-beta:
-  version "0.10.0-beta"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.10.0-beta.tgz#82c9ccb21fbc92c5dbed67db3240e299969efffb"
+katex@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.10.0.tgz#da562e5d0d5cc3aa602e27af8a9b8710bfbce765"
   dependencies:
-    match-at "^0.1.1"
-    nomnom "^1.8.1"
+    commander "^2.16.0"
 
 kind-of@^3.0.2:
   version "3.2.2"
@@ -399,9 +386,9 @@ markdown-it-emoji@^1.4.0:
   version "0.4.3"
   resolved "https://github.com/huukimit/markdown-it-sanitizer#e048f8a"
 
-markdown-it@^8.4.1:
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.1.tgz#206fe59b0e4e1b78a7c73250af9b34a4ad0aaf44"
+markdown-it@^8.4.2:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -412,10 +399,6 @@ markdown-it@^8.4.1:
 marked@^0.3.17:
   version "0.3.17"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.17.tgz#607f06668b3c6b1246b28f13da76116ac1aa2d2b"
-
-match-at@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/match-at/-/match-at-0.1.1.tgz#25d040d291777704d5e6556bbb79230ec2de0540"
 
 mdurl@^1.0.1:
   version "1.0.1"
@@ -434,13 +417,6 @@ minimist@~0.0.1:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
-
-nomnom@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/nomnom/-/nomnom-1.8.1.tgz#2151f722472ba79e50a76fc125bb8c8f2e4dc2a7"
-  dependencies:
-    chalk "~0.4.0"
-    underscore "~1.6.0"
 
 once@^1.3.0:
   version "1.4.0"
@@ -536,10 +512,6 @@ strip-ansi@^3.0.0:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
   dependencies:
     ansi-regex "^2.0.0"
-
-strip-ansi@~0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.1.1.tgz#39e8a98d044d150660abe4a6808acf70bb7bc991"
 
 supports-color@^2.0.0:
   version "2.0.0"
@@ -677,10 +649,6 @@ uglify-js@^2.6:
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
-
-underscore@~1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
 
 universalify@^0.1.0:
   version "0.1.1"

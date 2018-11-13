@@ -3,7 +3,7 @@ import Markdown = require('markdown-it');
 import emoji = require('markdown-it-emoji');
 import sanitize = require('markdown-it-sanitizer');
 
-import katex from './plugins/katex';
+import katex from './plugins/katex/katex';
 import highlight from './plugins/highlight';
 import { alterToken } from './utils';
 import { createPlugin as createEmbedPlugin } from './plugins/embed';

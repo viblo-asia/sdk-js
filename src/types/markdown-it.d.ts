@@ -69,13 +69,21 @@ declare namespace MarkdownIt {
         src: string;
         level: number;
         tokens: Token[];
+        delimiters: any[];
         push (type: string, tag: string, nesting: number): Token;
+    }
+
+    interface InlineDelimiter {
+        can_open: true;
+        can_close: false;
+        length: number;
     }
 
     interface StateInline extends State {
         pos: number;
         posMax: number;
         pending: string;
+        scanDelims (start: number, canSplitWord: boolean): InlineDelimiter;
     }
 
     interface StateBlock extends State {
