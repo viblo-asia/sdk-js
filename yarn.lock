@@ -176,11 +176,7 @@ color-name@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-commander@^2.12.1:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
-
-commander@^2.16.0:
+commander@^2.12.1, commander@^2.16.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
 
@@ -382,9 +378,9 @@ markdown-it-emoji@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/markdown-it-emoji/-/markdown-it-emoji-1.4.0.tgz#9bee0e9a990a963ba96df6980c4fddb05dfb4dcc"
 
-"markdown-it-sanitizer@https://github.com/huukimit/markdown-it-sanitizer#e048f8a":
+"markdown-it-sanitizer@https://github.com/huukimit/markdown-it-sanitizer#33dd3f7":
   version "0.4.3"
-  resolved "https://github.com/huukimit/markdown-it-sanitizer#e048f8a"
+  resolved "https://github.com/huukimit/markdown-it-sanitizer#33dd3f7"
 
 markdown-it@^8.4.2:
   version "8.4.2"
