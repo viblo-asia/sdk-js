@@ -73,14 +73,27 @@ interface Options {
 
 function createHighlighter(options: Options) {
     return (str: string, lang: string) => {
-        const prismLang = Prism.languages[lang.toLowerCase()];
+        const i = lang.indexOf(':');
+        let fileName = '';
+        let langName = lang;
+        if (i !== -1) {
+            fileName = lang.slice(i + 1).trim();
+            langName = lang.slice(0, i);
+        } else if (lang && lang.lastIndexOf('.') !== -1) {
+            fileName = lang;
+            langName = lang.slice(lang.lastIndexOf('.') + 1);
+        }
+
+        const prismLang = Prism.languages[langName.toLowerCase()];
         const code = prismLang
             ? Prism.highlight(str, prismLang)
             : escapeHtml(str);
 
-        const languageClass = `${options.langPrefix}${lang || 'none'}`;
+        const languageClass = `${options.langPrefix}${langName || 'none'}`;
 
-        return `<pre class="${languageClass}"><code class="${languageClass}">${code}</code></pre>`;
+        return `<pre class="${languageClass}" data-filename="${fileName}">`
+                + `<code class="${languageClass}">${code}</code>`
+                + `</pre>`;
     };
 }
 
