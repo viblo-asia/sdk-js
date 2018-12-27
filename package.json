@@ -1,6 +1,6 @@
 {
   "name": "viblo-sdk",
-  "version": "0.1.0-beta.15",
+  "version": "0.1.0-beta.17",
   "main": "sdk.js",
   "license": "MIT",
   "repository": {
