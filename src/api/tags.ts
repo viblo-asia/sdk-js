@@ -18,6 +18,9 @@ const associatedResource = <T> (type: string) =>
     (tag: string, params?: Request): Promise<PagedResource<T>> =>
         axios.get(`/tags/${tag}/${type}`, { params }).then(_ => _.data);
 
+export const getTechnicalTags = (params?: Request): Promise<PagedResource<TagItem>> =>
+    axios.get('technical-tags', { params }).then(_ => _.data);
+
 export const getTagPosts = associatedResource<Post>('posts');
 export const getTagQuestions = associatedResource<Question>('questions');
 export const getTagSeries = associatedResource<Series>('series');
