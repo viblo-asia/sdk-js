@@ -24,5 +24,6 @@ export enum CommentableType {
     Post = 'posts',
     Series = 'series',
     Question = 'questions',
-    Answer = 'answers'
+    Answer = 'answers',
+    User = 'users'
 }
