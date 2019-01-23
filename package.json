@@ -9,17 +9,20 @@
   },
   "homepage": "https://viblo.asia",
   "scripts": {
-    "dev": "rimraf dist && yarn build:copy && tsc -w",
-    "compile": "rimraf dist && tsc",
     "build:copy": "node ./scripts/copy-files.js",
     "build": "yarn compile && yarn build:copy",
+    "compile": "rimraf dist && tsc",
+    "dev": "rimraf dist && yarn build:copy && tsc -w",
+    "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "docs": "typedoc --out docs --target es6 --theme minimal --name 'Viblo Javascript SDK' --includeDeclarations --externalPattern node_module/* --excludeExternals src"
+    "release": "np --yolo --contents=dist",
+    "version": "yarn build"
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
     "@types/prismjs": "^1.9.0",
     "fs-extra": "^6.0.1",
+    "np": "^4.0.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.9.2",
