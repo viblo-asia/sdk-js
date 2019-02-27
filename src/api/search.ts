@@ -29,3 +29,5 @@ export const multisearch = (searchQuery: string, params?: Object) => axios.get('
         ...params
     }
 }).then(_ => _.data);
+
+export const searchUserToRequest = (params: SearchRequest) => axios.get(`/search-users`, { params }).then(_ => _.data);
