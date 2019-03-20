@@ -8,6 +8,7 @@ import {
 
 export enum PostFeedType {
     Newest = 'newest',
+    Posts = 'posts',
     Trending = 'trending',
     Following = 'followings',
     Clipped = 'clips',
