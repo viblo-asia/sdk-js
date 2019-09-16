@@ -30,7 +30,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "katex": "^0.10.0",
     "laravel-echo": "^1.4.0",
     "markdown-it": "^8.4.2",
