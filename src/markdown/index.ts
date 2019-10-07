@@ -14,6 +14,11 @@ export interface EmbedOptions {
     iframeClass?: string;
 }
 
+interface KatexOptions {
+    maxSize?: Number;
+    maxExpand?: Number;
+}
+
 export interface Options {
     /** Base URL */
     baseURL?: string;
@@ -21,16 +26,23 @@ export interface Options {
     embed?: boolean | EmbedOptions;
     /** Should relative URLs be made to absolute */
     absoluteURL?: boolean;
+    /** Katex Options */
+    katex: KatexOptions;
 }
 
 const defaultOptions: Options = {
-    baseURL: 'https://viblo.asia',
+    baseURL: 'http://viblo.lc:8000',
     embed: true,
-    absoluteURL: true
+    absoluteURL: true,
+    katex: {
+        maxSize: 500,
+        maxExpand: 100,
+    },
 };
 
 export function createRenderer(options: Options) {
     const _options = Object.assign({}, defaultOptions, options);
+    const _katexOptions = typeof _options.katex  === 'object' ? _options.katex : defaultOptions.katex;
 
     const md = Markdown({
         html: true,
@@ -43,7 +55,8 @@ export function createRenderer(options: Options) {
 
     md.use(katex, {
         throwOnError: true,
-        strict: true
+        strict: true,
+        ..._katexOptions,
     });
 
     alterToken('link_open', (token) => {

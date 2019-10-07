@@ -71,29 +71,39 @@ interface Options {
     langPrefix?: string;
 }
 
+interface ParsedLanguage {
+    fileName: string;
+    langName: string;
+}
+
+function parseLanguageToken(token: string): ParsedLanguage {
+    const i = token.indexOf(':');
+    let fileName = '';
+    let langName = token;
+    if (i !== -1) {
+        fileName = token.slice(i + 1).trim();
+        langName = token.slice(0, i);
+    } else if (token && token.lastIndexOf('.') !== -1) {
+        fileName = token;
+        langName = token.slice(token.lastIndexOf('.') + 1);
+    }
+
+    return { fileName, langName };
+}
+
 function createHighlighter(options: Options) {
     return (str: string, lang: string) => {
-        const i = lang.indexOf(':');
-        let fileName = '';
-        let langName = lang;
-        if (i !== -1) {
-            fileName = lang.slice(i + 1).trim();
-            langName = lang.slice(0, i);
-        } else if (lang && lang.lastIndexOf('.') !== -1) {
-            fileName = lang;
-            langName = lang.slice(lang.lastIndexOf('.') + 1);
-        }
-
+        const { fileName, langName } = parseLanguageToken(lang);
         const prismLang = Prism.languages[langName.toLowerCase()];
         const code = prismLang
-            ? Prism.highlight(str, prismLang)
+            ? Prism.highlight(str, prismLang, langName)
             : escapeHtml(str);
 
         const languageClass = `${options.langPrefix}${langName || 'none'}`;
 
         return `<pre class="${languageClass}" data-filename="${fileName}">`
-                + `<code class="${languageClass}">${code}</code>`
-                + `</pre>`;
+            + `<code class="${languageClass}">${code}</code>`
+            + '</pre>';
     };
 }
 

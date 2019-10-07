@@ -4,11 +4,22 @@ import { escape } from '../../utils';
 import inlineRule from './math_inline';
 import blockRule from './math_block';
 
+function renderErrorMessage(message: string) {
+    return `<p class="math-block--error">${message}</p>`;
+}
+
 function render(content: string, options: any) {
     try {
-        return options.displayMode
-            ? '<p>' + katex.renderToString(content, options) + '</p>'
-            : katex.renderToString(content, options);
+        if (content.length <= options.maxCharacter) {
+            return options.displayMode
+                ? `<p>${katex.renderToString(content, options)}</p>`
+                : katex.renderToString(content, options);
+        }
+
+        return renderErrorMessage(
+            'For performance reasons, math blocks are limited to 1000 characters.'
+            + 'Try splitting up this block, or include an image instead.'
+        );
     } catch (error) {
         return escape(content);
     }
