@@ -17,8 +17,8 @@ function render(content: string, options: any) {
         }
 
         return renderErrorMessage(
-            'For performance reasons, math blocks are limited to 1000 characters.'
-            + 'Try splitting up this block, or include an image instead.'
+            `For performance reasons, math blocks are limited to ${options.maxCharacter} characters.`
+            + ' Try splitting up this block, or include an image instead.'
         );
     } catch (error) {
         return escape(content);
