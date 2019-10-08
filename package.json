@@ -33,6 +33,7 @@
     "axios": "^0.18.1",
     "katex": "^0.11.1",
     "laravel-echo": "^1.6.1",
+    "lodash.escape": "^4.0.1",
     "markdown-it": "^8.4.2",
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-sanitizer": "https://github.com/huukimit/markdown-it-sanitizer#33dd3f7",

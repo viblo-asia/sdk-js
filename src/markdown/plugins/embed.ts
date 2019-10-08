@@ -1,6 +1,8 @@
 import { MarkdownIt, StateInline, Token } from 'markdown-it';
 import { renderEmbed } from '../utils';
 
+const _escape = require('lodash.escape');
+
 const regexp = /{@(embed|gist|vimeo|codepen|youtube|jsfiddle|slideshare|googleslide)\s*:\s*([\S]+?)}/;
 
 function parse(state: StateInline) {
@@ -29,7 +31,7 @@ const render = (options: EmbedOptions) => function (tokens: Token[], idx: number
 
     return renderEmbed({
         type: 'text/html',
-        src: `${baseURL}/embed?url=${url}&provider=${provider}`,
+        src: _escape(`${baseURL}/embed?url=${url}&provider=${provider}`),
         frameborder: 0,
         webkitallowfullscreen: true,
         mozallowfullscreen: true,
