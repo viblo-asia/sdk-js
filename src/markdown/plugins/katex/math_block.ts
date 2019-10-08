@@ -47,7 +47,7 @@ export default function (state: StateBlock, start: number, end: number, silent: 
 
     const token = state.push('math_block', 'math', 0);
     token.block = true;
-    token.content = (firstLine && firstLine.trim() ? firstLine + '\n' : '') +
+    token.content = (firstLine && firstLine.trim() ? `${firstLine}\n` : '') +
         state.getLines(start + 1, current, state.tShift[start], true) +
         (lastLine && lastLine.trim() ? lastLine : '');
     token.map = [start, state.line];
