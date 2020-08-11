@@ -17,6 +17,7 @@ export interface EmbedOptions {
 interface KatexOptions {
     maxSize?: Number;
     maxExpand?: Number;
+    maxCharacter?: Number;
 }
 
 export interface Options {
@@ -37,12 +38,13 @@ const defaultOptions: Options = {
     katex: {
         maxSize: 500,
         maxExpand: 100,
+        maxCharacter: 1000,
     },
 };
 
 export function createRenderer(options: Options) {
     const _options = Object.assign({}, defaultOptions, options);
-    const _katexOptions = typeof _options.katex  === 'object' ? _options.katex : defaultOptions.katex;
+    const _katexOptions = typeof _options.katex === 'object' ? _options.katex : defaultOptions.katex;
 
     const md = Markdown({
         html: true,
