@@ -6,13 +6,17 @@
 ---
 ## Installing
 
-```
+```bash
 npm install --save viblo-sdk
 ```
+
 ## Basic usage
-### - Markdown:
+
+### Markdown
+
 Create folder libs include file **markdown.js** (libs/markdown.js)
-```
+
+```javascript
 import { createRenderer } from 'viblo-sdk/markdown';
 
 const md = createRenderer({
@@ -31,10 +35,12 @@ const md = createRenderer({
 
 export default md;
 ```
+
 ### Reactjs:
 
 Create components **index.js** (components/Markdown/index.js)
-```
+
+```jsx
 import React from 'react';
 import PropTypes from 'prop-types'
 import md from './libs/markdown';
@@ -58,8 +64,10 @@ Markdown.defaultProps = {
 export default Markdown;
 
 ```
+
 Create page **index.js**
-```
+
+```jsx
 import Markdown from './components/Markdown'
 
 const Preview = () => {
@@ -70,9 +78,12 @@ const Preview = () => {
 
 export default Preview;
 ```
+
 ### Vuejs:
+
 Create components **Mardown.vue** (components/Mardown.vue)
-```
+
+```jsx
 <template>
     <div v-html="html"/>
 </template>
@@ -96,8 +107,10 @@ Create components **Mardown.vue** (components/Mardown.vue)
     };
 </script>
 ```
+
 Create page **index.vue**
-```
+
+```jsx
 <template>
    <Markdown :content={'This is content markdown'} />
 </template>
@@ -111,5 +124,6 @@ Create page **index.vue**
     }
 </script
 ```
-[How to use Markdown?](https://viblo.asia/helps/cach-su-dung-markdown-bxjvZYnwkJZ)
+
+[How to use Viblo Markdown Syntax?](https://viblo.asia/helps/cach-su-dung-markdown-bxjvZYnwkJZ)
 ---
