@@ -23,6 +23,8 @@ interface KatexOptions {
 export interface Options {
     /** Base URL */
     baseURL?: string;
+    /** Whether to add mention link or not */
+    mention?: boolean;
     /** Whether to render embedments or not */
     embed?: boolean | EmbedOptions;
     /** Should relative URLs be made to absolute */
@@ -32,7 +34,8 @@ export interface Options {
 }
 
 const defaultOptions: Options = {
-    baseURL: 'http://viblo.lc:8000',
+    baseURL: 'https://viblo.asia',
+    mention: true,
     embed: true,
     absoluteURL: true,
     katex: {
@@ -74,7 +77,9 @@ export function createRenderer(options: Options) {
         return token;
     }, md);
 
-    md.linkify.add('@', createMentionPlugin(`${_options.baseURL}/u`));
+    if (_options.mention !== false) {
+        md.linkify.add('@', createMentionPlugin(`${_options.baseURL}/u`));
+    }
 
     if (_options.embed !== false) {
         const embedOptions = typeof _options.embed === 'object' ? _options.embed : {};
