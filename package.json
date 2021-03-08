@@ -22,15 +22,14 @@
     "@types/node": "^10.5.2",
     "@types/prismjs": "^1.9.0",
     "fs-extra": "^6.0.1",
-    "np": "^4.0.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.10.0",
     "tslint-config-airbnb": "^5.9.2",
-    "typedoc": "^0.19.2",
+    "typedoc": "^0.20.30",
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "katex": "^0.11.1",
     "laravel-echo": "^1.6.1",
     "lodash.escape": "^4.0.1",
