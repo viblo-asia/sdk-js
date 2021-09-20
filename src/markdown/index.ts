@@ -60,7 +60,6 @@ export function createRenderer(options: Options) {
 
     md.use(katex, {
         throwOnError: true,
-        strict: true,
         ..._katexOptions,
     });
 
