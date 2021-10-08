@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "katex": "^0.11.1",
+    "katex": "0.13.18",
     "laravel-echo": "^1.6.1",
     "lodash.escape": "^4.0.1",
     "markdown-it": "^8.4.2",

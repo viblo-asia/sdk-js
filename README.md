@@ -124,6 +124,36 @@ Create page **index.vue**
     }
 </script
 ```
+### Echo
+```js
+import cookies from 'axios/lib/helpers/cookies'
+import { newConnection as newEchoConnection } from 'viblo-sdk/echo'
+
+let options = {
+    host: '/',
+    csrfToken: cookies.read('XSRF-TOKEN'),
+}
+
+export default newEchoConnection(options)
+```
+
+### API
+```js
+// api for comments
+import { ... } from 'viblo-sdk/api/comments'
+
+// api for me
+import { ... } from 'viblo-sdk/api/me'
+
+// api for users
+import { ... } from 'viblo-sdk/api/users'
+
+// api for answers
+import { ... } from 'viblo-sdk/api/answers'
+
+...
+
+```
 
 [How to use Viblo Markdown Syntax?](https://viblo.asia/helps/cach-su-dung-markdown-bxjvZYnwkJZ)
 ---
