@@ -1,6 +1,7 @@
 import twemoji from 'twemoji/2/esm';
 import Markdown = require('markdown-it');
 import emoji = require('markdown-it-emoji');
+import * as sanitizeHtml from 'sanitize-html';
 import sanitize = require('markdown-it-sanitizer');
 
 import katex from './plugins/katex/katex';
@@ -43,6 +44,11 @@ const defaultOptions: Options = {
         maxExpand: 100,
         maxCharacter: 1000,
     },
+};
+
+const sanitizeOptions: sanitizeHtml.IOptions = {
+    allowedTags: false,
+    allowedAttributes: false
 };
 
 export function createRenderer(options: Options) {
@@ -92,6 +98,11 @@ export function createRenderer(options: Options) {
     }
 
     md.use(sanitize, { align: true });
+
+    const originalRender = md.render;
+    md.render = (markdownContent) => {
+        return sanitizeHtml(originalRender.call(md, markdownContent), sanitizeOptions);
+    };
 
     return md;
 }
