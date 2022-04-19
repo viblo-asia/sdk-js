@@ -6,6 +6,7 @@ import sanitize = require('markdown-it-sanitizer');
 
 import katex from './plugins/katex/katex';
 import highlight from './plugins/highlight';
+import clipboard from './plugins/clipboard';
 import { alterToken } from './utils';
 import { createPlugin as createEmbedPlugin } from './plugins/embed';
 import { createDefinition as createMentionPlugin } from './plugins/linkify-mention';
@@ -21,6 +22,19 @@ interface KatexOptions {
     maxCharacter?: Number;
 }
 
+export interface ClipboardOptions {
+    iconCopyClass?: string;
+    successText?: string;
+    successTextDelay: Number;
+    buttonClass?: string;
+    contentClass?: string;
+    titleButton?: string;
+    showMoreText?: string;
+    showMoreClass?: string;
+    showMoreIcon?: string;
+    maxStringLengthShortcut: Number;
+}
+
 export interface Options {
     /** Base URL */
     baseURL?: string;
@@ -32,6 +46,8 @@ export interface Options {
     absoluteURL?: boolean;
     /** Katex Options */
     katex: KatexOptions;
+    /** Clipboard Options */
+    clipboard: ClipboardOptions;
 }
 
 const defaultOptions: Options = {
@@ -44,6 +60,18 @@ const defaultOptions: Options = {
         maxExpand: 100,
         maxCharacter: 1000,
     },
+    clipboard: {
+        iconCopyClass: 'el-icon-document-copy',
+        successText: 'Copied ✔️',
+        successTextDelay: 2000,
+        buttonClass: 'v-markdown-it-code-copy',
+        contentClass: 'v-markdown-content-box',
+        titleButton: 'Copy',
+        showMoreText: 'Show more',
+        showMoreClass: 'v-markdown-it-show-more',
+        showMoreIcon: 'el-icon-bottom',
+        maxStringLengthShortcut: 300
+    }
 };
 
 const sanitizeOptions: sanitizeHtml.IOptions = {
@@ -55,6 +83,10 @@ export function createRenderer(options: Options) {
     const _options = Object.assign({}, defaultOptions, options);
     const _katexOptions = typeof _options.katex === 'object' ? _options.katex : defaultOptions.katex;
 
+    const _clipboardOptions = typeof _options.clipboard === 'object'
+        ? Object.assign({}, defaultOptions.clipboard, _options.clipboard)
+        : defaultOptions.clipboard;
+
     const md = Markdown({
         html: true,
         linkify: true
@@ -62,6 +94,7 @@ export function createRenderer(options: Options) {
 
     md.use(emoji);
     md.use(highlight);
+    md.use(clipboard, _clipboardOptions);
     md.renderer.rules.emoji = (token, idx) => twemoji.parse(token[idx].content);
 
     md.use(katex, {
