@@ -1,0 +1,85 @@
+.v-markdown-it-code-copy {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 7.5px;
+    right: 6px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: #655454;
+    height: 25px;
+    opacity: 0.5;
+    border-radius: 5px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.v-markdown-icon {
+    font-size: 16px;
+    color: #fff
+}
+
+.v-markdown-tooltip .tooltiptext {
+    width: 100px;
+    font-size: 0.75rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.v-markdown-tooltip:hover .tooltiptext {
+    display: block !important;
+}
+
+.v-markdown-tooltip .tooltiptext {
+    right: 105%;
+    background: #655454;
+}
+
+.v-markdown-content-box {
+    max-height: 300px;
+    padding-bottom: 1rem;
+
+    &:not(&--expanded) {
+        cursor: pointer;
+        mask-image: linear-gradient(180deg,#000 60%,transparent);
+    }
+
+    &--expanded {
+        max-height: initial !important;
+    }
+}
+
+.v-content-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.v-markdown-it-show-more {
+    position: absolute;
+    bottom: 50%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: #655454;
+    color: #fff;
+    opacity: 0.8;
+    border-radius: 5px;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    .show-more-text {
+        font-size: 16px;
+    }
+}
