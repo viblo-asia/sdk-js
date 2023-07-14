@@ -58,6 +58,18 @@
     }
 }
 
+.editor-preview-side {
+    .v-markdown-content-box {
+        max-height: initial !important;
+        mask-image: none !important
+    }
+
+    .button-more {
+        display: none !important;
+    }
+}   
+
+
 .v-content-flex-center {
     display: flex;
     align-items: center;

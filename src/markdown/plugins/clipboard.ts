@@ -58,7 +58,7 @@ function renderCode(origRule, options: Options) {
         <div class="v-content-flex-center">
             <button
                 style="display: none"
-                class="${options.showMoreClass}"
+                class="${options.showMoreClass} button-more"
             >
                 <span class="${options.showMoreIcon}"></span>
                 <span class="show-more-text">${options.showMoreText}</span>
